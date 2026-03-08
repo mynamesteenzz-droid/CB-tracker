@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,11 +105,37 @@
         <h3>Track Your Bus</h3>
         <p>Select a bus route to view live location</p>
 
-        <select id="busSelect">
-            <option value="">-- Select Bus Route --</option>
-            
-            <!-- Add up to Bus 27 -->
-        </select>
+       <select id="busSelect" onchange="showSelectedBus()">
+<option value="">-- Select Bus Route --</option>
+<option value="bus1">Bus 1</option>
+<option value="bus2">Bus 2</option>
+<option value="bus3">Bus 3</option>
+<option value="bus4">Bus 4</option>
+<option value="bus5">Bus 5</option>
+<option value="bus6">Bus 6</option>
+<option value="bus7">Bus 7</option>
+<option value="bus8">Bus 8</option>
+<option value="bus9">Bus 9</option>
+<option value="bus10">Bus 10</option>
+<option value="bus11">Bus 11</option>
+<option value="bus12">Bus 12</option>
+<option value="bus13">Bus 13</option>
+<option value="bus14">Bus 14</option>
+<option value="bus15">Bus 15</option>
+<option value="bus16">Bus 16</option>
+<option value="bus17">Bus 17</option>
+<option value="bus18">Bus 18</option>
+<option value="bus19">Bus 19</option>
+<option value="bus20">Bus 20</option>
+<option value="bus21">Bus 21</option>
+<option value="bus22">Bus 22</option>
+<option value="bus23">Bus 23</option>
+<option value="bus24">Bus 24</option>
+<option value="bus25">Bus 25</option>
+<option value="bus26">Bus 26</option>
+<option value="bus27">Bus 27</option>
+</select>
+<p id="selectedBusText"></p>
 
         <button onclick="loadLocation()">Track Bus</button>
     </div>
@@ -144,20 +171,24 @@
 </footer>
 
 <!-- JAVASCRIPT -->
+
+
 <script>
 
-<script>
 
 
 
-// create 27 buses automatically
-for(let i = 1; i <= 27; i++){
-    const option = document.createElement("option");
-    option.value = "bus" + i;
-    option.textContent = "Bus " + (i < 10 ? "0" + i : i);
-    document.getElementById("busSelect").appendChild(option);
+
+function showSelectedBus() {
+    const bus = document.getElementById("busSelect").value;
+    const text = document.getElementById("selectedBusText");
+
+    if (bus === "") {
+        text.innerHTML = "";
+    } else {
+        text.innerHTML = "Selected Route: " + bus;
+    }
 }
-
 function loadLocation() {
     const bus = document.getElementById("busSelect").value;
 
@@ -175,6 +206,22 @@ function loadLocation() {
         }
     });
 }
+
+
+function trackBus() {
+
+    const bus = document.getElementById("busSelect").value;
+
+    if(bus === ""){
+        alert("Please select a bus route first");
+        return;
+    }
+
+    alert("Tracking started for " + bus);
+
+}
+
+
 </script>
 </body>
 </html>
