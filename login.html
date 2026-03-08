@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+</head>
+<body>
+
+<h2>Bus Incharge Login</h2>
+
+<input type="email" id="email" placeholder="Enter Email"><br><br>
+<input type="password" id="password" placeholder="Enter Password"><br><br>
+<button onclick="login()">Login</button>
+
+<script>
+
+const users = [
+
+  { email: "pneeharika@klh.edu.in", password: "pneeharika@2008", role: "bus", bus: "bus1" },
+  { email: "mynamesteenzz@gmail.com", password: "mynamesteenzz@123", role: "student", bus: "bus1" },
+
+  { email: "srikanth@gmail.com", password: "Neetu@456", role: "bus", bus: "bus2" },
+  { email: "neeharikapolavarapu@gmail.com", password: "polavarapuneeharika@2008", role: "student", bus: "bus2" },
+
+  { email: "bus3@klh.com", password: "1234", role: "bus", bus: "bus3" },
+  { email: "student3@klh.com", password: "1234", role: "student", bus: "bus3" },
+
+  { email: "bus4@klh.com", password: "1234", role: "bus", bus: "bus4" },
+  { email: "student4@klh.com", password: "1234", role: "student", bus: "bus4" },
+
+  { email: "bus5@klh.com", password: "1234", role: "bus", bus: "bus5" },
+  { email: "student5@klh.com", password: "1234", role: "student", bus: "bus5" },
+
+  { email: "bus6@klh.com", password: "1234", role: "bus", bus: "bus6" },
+  { email: "student6@klh.com", password: "1234", role: "student", bus: "bus6" },
+
+  { email: "bus7@klh.com", password: "1234", role: "bus", bus: "bus7" },
+  { email: "student7@klh.com", password: "1234", role: "student", bus: "bus7" },
+
+  { email: "bus8@klh.com", password: "1234", role: "bus", bus: "bus8" },
+  { email: "student8@klh.com", password: "1234", role: "student", bus: "bus8" },
+
+  { email: "bus9@klh.com", password: "1234", role: "bus", bus: "bus9" },
+  { email: "student9@klh.com", password: "1234", role: "student", bus: "bus9" },
+
+  { email: "bus10@klh.com", password: "1234", role: "bus", bus: "bus10" },
+  { email: "student10@klh.com", password: "1234", role: "student", bus: "bus10" },
+
+  { email: "bus11@klh.com", password: "1234", role: "bus", bus: "bus11" },
+  { email: "student11@klh.com", password: "1234", role: "student", bus: "bus11" },
+
+  { email: "bus12@klh.com", password: "1234", role: "bus", bus: "bus12" },
+  { email: "student12@klh.com", password: "1234", role: "student", bus: "bus12" },
+
+  { email: "bus13@klh.com", password: "1234", role: "bus", bus: "bus13" },
+  { email: "student13@klh.com", password: "1234", role: "student", bus: "bus13" },
+
+  { email: "bus14@klh.com", password: "1234", role: "bus", bus: "bus14" },
+  { email: "student14@klh.com", password: "1234", role: "student", bus: "bus14" },
+
+  { email: "bus15@klh.com", password: "1234", role: "bus", bus: "bus15" },
+  { email: "student15@klh.com", password: "1234", role: "student", bus: "bus15" },
+
+  { email: "bus16@klh.com", password: "1234", role: "bus", bus: "bus16" },
+  { email: "student16@klh.com", password: "1234", role: "student", bus: "bus16" },
+
+  { email: "bus17@klh.com", password: "1234", role: "bus", bus: "bus17" },
+  { email: "student17@klh.com", password: "1234", role: "student", bus: "bus17" },
+
+  { email: "bus18@klh.com", password: "1234", role: "bus", bus: "bus18" },
+  { email: "student18@klh.com", password: "1234", role: "student", bus: "bus18" },
+
+  { email: "bus19@klh.com", password: "1234", role: "bus", bus: "bus19" },
+  { email: "student19@klh.com", password: "1234", role: "student", bus: "bus19" },
+
+  { email: "bus20@klh.com", password: "1234", role: "bus", bus: "bus20" },
+  { email: "student20@klh.com", password: "1234", role: "student", bus: "bus20" },
+
+  { email: "bus21@klh.com", password: "1234", role: "bus", bus: "bus21" },
+  { email: "student21@klh.com", password: "1234", role: "student", bus: "bus21" },
+
+  { email: "bus22@klh.com", password: "1234", role: "bus", bus: "bus22" },
+  { email: "student22@klh.com", password: "1234", role: "student", bus: "bus22" },
+
+  { email: "bus23@klh.com", password: "1234", role: "bus", bus: "bus23" },
+  { email: "student23@klh.com", password: "1234", role: "student", bus: "bus23" },
+
+  { email: "bus24@klh.com", password: "1234", role: "bus", bus: "bus24" },
+  { email: "student24@klh.com", password: "1234", role: "student", bus: "bus24" },
+
+  { email: "bus25@klh.com", password: "1234", role: "bus", bus: "bus25" },
+  { email: "student25@klh.com", password: "1234", role: "student", bus: "bus25" },
+
+  { email: "bus26@klh.com", password: "1234", role: "bus", bus: "bus26" },
+  { email: "student26@klh.com", password: "1234", role: "student", bus: "bus26" },
+
+  { email: "bus27@klh.com", password: "1234", role: "bus", bus: "bus27" },
+  { email: "student27@klh.com", password: "1234", role: "student", bus: "bus27" }
+
+];
+function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const user = users.find(u => u.email === email && u.password === password);
+
+  if(user){
+    localStorage.setItem("loggedUser", JSON.stringify(user));
+    alert("Login Successful");
+    window.location.href = "admin.html";
+  } else {
+    alert("Invalid Credentials");
+  }
+}
+
+</script>
+
+</body>
+</html>
