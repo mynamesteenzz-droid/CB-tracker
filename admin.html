@@ -11,7 +11,26 @@
 <input type="text" id="link" placeholder="Paste WhatsApp Live Location"><br><br>
 <button onclick="updateLocation()">Update</button>
 <button onclick="logout()">Logout</button>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDPWTpCY0kLJdPgBZBkmV32Cr53TLCFYDY",
+    authDomain: "cb-tracker-446fb.firebaseapp.com",
+    databaseURL: "https://cb-tracker-446fb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "cb-tracker-446fb",
+    storageBucket: "cb-tracker-446fb.firebasestorage.app",
+    messagingSenderId: "565822995497",
+    appId: "1:565822995497:web:09ce8f9224eadbb2f0f038"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
 <script>
 
 // 🔒 CHECK LOGIN
@@ -55,29 +74,7 @@ function logout(){
 }
 
 </script>
-<script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDPWTpCY0kLJdPgBZBkmV32Cr53TLCFYDY",
-  authDomain: "cb-tracker-446fb.firebaseapp.com",
-  databaseURL: "https://cb-tracker-446fb-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "cb-tracker-446fb",
-  storageBucket: "cb-tracker-446fb.firebasestorage.app",
-  messagingSenderId: "565822995497",
-  appId: "1:565822995497:web:09ce8f9224eadbb2f0f038"
-};
-
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-
-window.database = database;
-window.ref = ref;
-window.set = set;
-window.get = get;
-
-</script>
 </body>
+
 </html>
