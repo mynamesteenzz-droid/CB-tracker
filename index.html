@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,7 +88,7 @@
         <a href="#track">Track Bus</a>
         <a href="#routes">Routes</a>
         <a href="#contact">Contact</a>
-	<a href="login.html">Login</a>
+        <a href="login.html">Login</a>
     </nav>
 </header>
 
@@ -105,7 +104,7 @@
         <h3>Track Your Bus</h3>
         <p>Select a bus route to view live location</p>
 
-       <select id="busSelect" onchange="showSelectedBus()">
+<select id="busSelect" onchange="showSelectedBus()">
 <option value="">-- Select Bus Route --</option>
 <option value="bus1">Bus 1</option>
 <option value="bus2">Bus 2</option>
@@ -135,9 +134,11 @@
 <option value="bus26">Bus 26</option>
 <option value="bus27">Bus 27</option>
 </select>
+
 <p id="selectedBusText"></p>
 
-        <button onclick="loadLocation()">Track Bus</button>
+<button onclick="loadLocation()">Track Bus</button>
+
     </div>
 
     <!-- MAP SECTION -->
@@ -173,32 +174,24 @@
 <!-- JAVASCRIPT -->
 
 <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyDPWTpCY0kLJdPgBZBkmV32Cr53TLCFYDY",
-    authDomain: "cb-tracker-446fb.firebaseapp.com",
-    databaseURL: "https://cb-tracker-446fb-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "cb-tracker-446fb",
-    storageBucket: "cb-tracker-446fb.firebasestorage.app",
-    messagingSenderId: "565822995497",
-    appId: "1:565822995497:web:09ce8f9224eadbb2f0f038"
-  };
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
-<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDPWTpCY0kLJdPgBZBkmV32Cr53TLCFYDY",
+  authDomain: "cb-tracker-446fb.firebaseapp.com",
+  databaseURL: "https://cb-tracker-446fb-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "cb-tracker-446fb",
+  storageBucket: "cb-tracker-446fb.firebasestorage.app",
+  messagingSenderId: "565822995497",
+  appId: "1:565822995497:web:09ce8f9224eadbb2f0f038"
+};
 
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
-
-
-
-function showSelectedBus() {
+window.showSelectedBus = function () {
     const bus = document.getElementById("busSelect").value;
     const text = document.getElementById("selectedBusText");
 
@@ -208,7 +201,9 @@ function showSelectedBus() {
         text.innerHTML = "Selected Route: " + bus;
     }
 }
-function loadLocation() {
+
+window.loadLocation = function () {
+
     const bus = document.getElementById("busSelect").value;
 
     if (bus === "") {
@@ -217,31 +212,23 @@ function loadLocation() {
     }
 
     get(ref(database, "buses/" + bus)).then((snapshot) => {
+
         if (snapshot.exists()) {
+
             const link = snapshot.val();
             window.open(link, "_blank");
+
         } else {
+
             alert("Location not updated yet.");
+
         }
+
     });
-}
-
-
-function trackBus() {
-
-    const bus = document.getElementById("busSelect").value;
-
-    if(bus === ""){
-        alert("Please select a bus route first");
-        return;
-    }
-
-    alert("Tracking started for " + bus);
 
 }
-
 
 </script>
+
 </body>
 </html>
-
