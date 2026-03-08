@@ -3,47 +3,45 @@
 <head>
 <title>Update Bus Location</title>
 </head>
+
 <body>
 
-<h2>Update Bus Live Location</h2>
+<h2>Update Bus Location</h2>
 
 <select id="busSelect"></select><br><br>
-<input type="text" id="link" placeholder="Paste WhatsApp Live Location"><br><br>
-<button onclick="updateLocation()">Update</button>
+<input type="text" id="locationLink" placeholder="Paste Google Maps Live Location"><br><br>
+
+<button onclick="updateBus()">Update Location</button>
 <button onclick="logout()">Logout</button>
+
+<p id="status"></p>
+
 <script type="module">
-  // Import the functions you need from the SDKs you need
- import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyDPWTpCY0kLJdPgBZBkmV32Cr53TLCFYDY",
-    authDomain: "cb-tracker-446fb.firebaseapp.com",
-    databaseURL: "https://cb-tracker-446fb-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "cb-tracker-446fb",
-    storageBucket: "cb-tracker-446fb.firebasestorage.app",
-    messagingSenderId: "565822995497",
-    appId: "1:565822995497:web:09ce8f9224eadbb2f0f038"
-  };
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "cb-tracker-446fb.firebaseapp.com",
+  databaseURL: "https://cb-tracker-446fb-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "cb-tracker-446fb",
+  storageBucket: "cb-tracker-446fb.firebasestorage.app",
+  messagingSenderId: "565822995497",
+  appId: "1:565822995497:web:09ce8f9224eadbb2f0f038"
+};
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-</script>
-<script>
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
-// 🔒 CHECK LOGIN
+// Check login
 const user = JSON.parse(localStorage.getItem("loggedUser"));
-
-if (!user) {
+if(!user){
   alert("Please login first!");
   window.location.href = "login.html";
 }
 
-// create 27 buses
+// Create bus dropdown
 for(let i=1; i<=27; i++){
   const option = document.createElement("option");
   option.value = "bus"+i;
@@ -51,33 +49,31 @@ for(let i=1; i<=27; i++){
   document.getElementById("busSelect").appendChild(option);
 }
 
-// restrict bus incharge to only their bus
-if(user.role === "bus"){
-  document.getElementById("busSelect").value = user.bus;
-  document.getElementById("busSelect").disabled = true;
-}
+// Restrict each bus incharge to only their bus
+document.getElementById("busSelect").value = user.bus;
+document.getElementById("busSelect").disabled = true;
 
-function updateLocation(){
-  const bus = document.getElementById("busSelect").value;
-  const link = document.getElementById("link").value.trim();
+// Update function
+window.updateBus = function(){
+  let bus = document.getElementById("busSelect").value;
+  let link = document.getElementById("locationLink").value.trim();
 
-  if(link === ""){
-    alert("Please paste a link first!");
+  if(link==""){
+    alert("Paste the location first!");
     return;
   }
 
-  set(ref(database, "buses/" + bus), link);
-
-  alert("Location Updated Successfully");
+  set(ref(database,"buses/"+bus), link);
+  document.getElementById("status").innerText="Location Updated!";
 }
-function logout(){
+
+// Logout
+window.logout = function(){
   localStorage.removeItem("loggedUser");
-  window.location.href = "index.html";
+  window.location.href = "login.html";
 }
 
 </script>
 
 </body>
-
 </html>
-
