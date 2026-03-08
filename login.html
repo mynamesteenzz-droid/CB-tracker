@@ -105,8 +105,16 @@ function login() {
 
   if(user){
     localStorage.setItem("loggedUser", JSON.stringify(user));
+
     alert("Login Successful");
-    window.location.href = "admin.html";
+
+    if(user.role === "bus"){
+        window.location.href = "admin.html";
+    } 
+    else {
+        window.location.href = "index.html";
+    }
+
   } else {
     alert("Invalid Credentials");
   }
@@ -116,3 +124,4 @@ function login() {
 
 </body>
 </html>
+
