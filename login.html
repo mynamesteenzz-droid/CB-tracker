@@ -2,19 +2,77 @@
 <html>
 <head>
 <title>Bus Tracker Login</title>
+  <style>
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #8e24aa, #ce93d8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 350px;
+}
+
+h2 {
+    margin-bottom: 30px;
+    color: #4a148c;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #6a1b9a;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #4a148c;
+}
+
+#msg {
+    color: red;
+    margin-top: 15px;
+    font-weight: bold;
+}
+</style>
 </head>
 
 <body>
+<body>
+<div class="container">
+    <h2>Bus Incharge Login</h2>
 
-<h2>Bus Incharge Login</h2>
+    <input type="email" id="email" placeholder="Enter Email"><br>
+    <input type="password" id="password" placeholder="Enter Password"><br>
 
-<input type="email" id="email" placeholder="Enter Email"><br><br>
-<input type="password" id="password" placeholder="Enter Password"><br><br>
+    <button onclick="login()">Login</button>
 
-<button onclick="login()">Login</button>
-
-<p id="msg"></p>
-
+    <p id="msg"></p>
+</div>
 <script>
 
 // 27 bus incharge accounts
@@ -67,3 +125,4 @@ function login(){
 
 </body>
 </html>
+
