@@ -2,238 +2,404 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>KLH Transport — Bus Incharge Dashboard</title>
+  <title>KLH Transport — Incharge Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --maroon:       #7B1022;
-      --maroon-deep:  #4E0A16;
-      --maroon-rich:  #9B1A30;
-      --gold:         #C9920A;
-      --gold-bright:  #E8B020;
-      --gold-pale:    #F5D878;
-      --gold-glow:    rgba(201,146,10,0.35);
-      --cream:        #FDF8EE;
-      --cream-dark:   #F2E8D0;
-      --border:       rgba(201,146,10,0.2);
-      --text-main:    #1A0509;
-      --text-muted:   #7A4050;
-      --card-bg:      rgba(255,252,244,0.95);
-      --green:        #16a34a;
-      --green-bg:     rgba(34,197,94,0.1);
+      --maroon : #7B1022; --dark   : #4E0A16; --gold   : #C9920A;
+      --yellow : #E8B020; --cream  : #FDF8EE; --light  : #F2E8D0;
+      --text   : #1A0509; --muted  : #7A4050; --border : rgba(201,146,10,0.25);
+      --green  : #16a34a;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text-main); min-height: 100vh; }
-    .bg-layer { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse 70% 50% at 5% 15%, rgba(123,16,34,0.07), transparent 55%), radial-gradient(ellipse 50% 40% at 95% 85%, rgba(201,146,10,0.05), transparent 50%), var(--cream); }
-    header { background: rgba(78,10,22,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(201,146,10,0.3); padding: 0 40px; height: 68px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 24px rgba(0,0,0,0.2); }
-    .header-left { display: flex; align-items: center; gap: 16px; }
-    .logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--gold), var(--gold-bright)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 0 16px var(--gold-glow); }
-    .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: var(--gold-pale); }
-    .header-divider { width: 1px; height: 28px; background: rgba(201,146,10,0.2); margin: 0 4px; }
-    .header-page { font-size: 0.82rem; color: rgba(245,216,120,0.55); letter-spacing: 1px; text-transform: uppercase; }
-    .header-right { display: flex; align-items: center; gap: 12px; }
-    .user-chip { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.06); border: 1px solid rgba(201,146,10,0.2); border-radius: 10px; padding: 8px 16px; }
-    .user-avatar { width: 30px; height: 30px; background: linear-gradient(135deg, var(--gold), var(--gold-bright)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--maroon-deep); }
-    .user-name { font-size: 0.85rem; font-weight: 600; color: var(--gold-pale); }
-    .user-bus { font-size: 0.7rem; color: rgba(245,216,120,0.55); }
-    .btn-logout { display: flex; align-items: center; gap: 7px; background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25); color: #fca5a5; padding: 8px 16px; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-    .btn-logout:hover { background: rgba(239,68,68,0.2); color: #ef4444; }
-    main { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
-    .page-header { margin-bottom: 40px; animation: fadeUp 0.5s ease both; }
-    .page-tag { display: inline-flex; align-items: center; gap: 7px; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-    .page-tag::before { content: ''; width: 22px; height: 2px; background: var(--gold); }
-    .page-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--maroon-deep); margin-bottom: 6px; }
-    .page-sub { font-size: 0.9rem; color: var(--text-muted); }
-    .status-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; animation: fadeUp 0.5s 0.1s ease both; }
-    .status-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; box-shadow: 0 4px 20px rgba(123,16,34,0.06); }
-    .status-card-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); margin-bottom: 6px; }
-    .status-card-value { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--maroon); }
-    .status-card-icon { font-size: 1.4rem; float: right; margin-top: -2px; opacity: 0.6; }
-    .current-status { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 6px 30px rgba(123,16,34,0.07); animation: fadeUp 0.5s 0.15s ease both; }
-    .cs-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-    .cs-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: var(--maroon); }
-    .status-pill { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
-    .status-pill.none { background: rgba(123,16,34,0.08); color: var(--text-muted); }
-    .status-pill.active { background: var(--green-bg); border: 1px solid rgba(34,197,94,0.3); color: var(--green); }
-    .status-dot { width: 7px; height: 7px; border-radius: 50%; }
-    .status-dot.green { background: #22c55e; animation: pulse-dot 1.5s infinite; box-shadow: 0 0 6px #22c55e; }
-    .status-dot.grey { background: #9ca3af; }
-    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
-    .current-link-box { background: var(--cream-dark); border: 1.5px dashed var(--border); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 0.85rem; color: var(--text-muted); word-break: break-all; }
-    .current-link-box a { color: var(--maroon); text-decoration: none; flex: 1; }
-    .current-link-box a:hover { color: var(--gold); }
-    .btn-open-link { background: rgba(123,16,34,0.08); border: 1px solid rgba(123,16,34,0.15); color: var(--maroon); padding: 7px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
-    .btn-open-link:hover { background: var(--maroon); color: white; }
-    .update-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 32px; box-shadow: 0 6px 30px rgba(123,16,34,0.07); animation: fadeUp 0.5s 0.2s ease both; }
-    .uc-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--maroon); margin-bottom: 6px; }
-    .uc-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 28px; }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
-    .step { background: var(--cream-dark); border-radius: 12px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px; }
-    .step-num { width: 24px; height: 24px; background: linear-gradient(135deg, var(--maroon), var(--maroon-rich)); color: var(--gold-pale); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
-    .step-text { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
-    .step-text strong { color: var(--text-main); }
-    .field-label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--maroon); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
+
+    header { position: sticky; top: 0; z-index: 100; height: 65px; background: var(--dark); border-bottom: 2px solid var(--gold); display: flex; align-items: center; justify-content: space-between; padding: 0 36px; }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .logo-icon { width: 34px; height: 34px; background: var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+    .logo-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--yellow); }
+    .header-divider { width: 1px; height: 24px; background: rgba(201,146,10,0.2); }
+    .page-label { font-size: 0.78rem; color: rgba(232,176,32,0.5); letter-spacing: 1px; text-transform: uppercase; }
+    .header-right { display: flex; align-items: center; gap: 10px; }
+    .user-chip { display: flex; align-items: center; gap: 9px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,146,10,0.2); border-radius: 9px; padding: 7px 14px; }
+    .user-avatar { width: 28px; height: 28px; background: var(--gold); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--dark); }
+    .user-name { font-size: 0.82rem; font-weight: 600; color: var(--yellow); }
+    .user-role { font-size: 0.66rem; color: rgba(232,176,32,0.5); }
+    .logout-btn { display: flex; align-items: center; gap: 6px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); color: #fca5a5; padding: 7px 14px; border-radius: 7px; font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s, color 0.2s; }
+    .logout-btn:hover { background: rgba(239,68,68,0.2); color: #ef4444; }
+
+    main { max-width: 840px; margin: 0 auto; padding: 44px 20px; }
+    .page-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--dark); margin-bottom: 4px; }
+    .page-subtitle { font-size: 0.87rem; color: var(--muted); margin-bottom: 32px; }
+
+    .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 26px; }
+    .stat-box { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; box-shadow: 0 3px 14px rgba(123,16,34,0.05); }
+    .stat-box .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
+    .stat-box .stat-value { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--maroon); }
+    .stat-box .stat-icon { float: right; font-size: 1.2rem; opacity: 0.5; }
+
+    .card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 26px; box-shadow: 0 4px 20px rgba(123,16,34,0.06); margin-bottom: 20px; }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 1.18rem; color: var(--maroon); }
+
+    .status-pill { display: flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 50px; font-size: 0.72rem; font-weight: 700; }
+    .status-pill.not-set { background: rgba(123,16,34,0.07); color: var(--muted); }
+    .status-pill.active  { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: var(--green); }
+    .status-pill .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+    .status-pill.not-set .dot { background: #9ca3af; }
+    .status-pill.active  .dot { background: #22c55e; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+    .link-display { background: var(--light); border: 1.5px dashed var(--border); border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 0.82rem; color: var(--muted); word-break: break-all; }
+    .link-display a { color: var(--maroon); text-decoration: none; flex: 1; }
+    .link-display a:hover { color: var(--gold); }
+    .open-btn { background: rgba(123,16,34,0.07); border: 1px solid rgba(123,16,34,0.14); color: var(--maroon); padding: 6px 12px; border-radius: 7px; font-size: 0.76rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s, color 0.2s; }
+    .open-btn:hover { background: var(--maroon); color: white; }
+
+    .tabs { display: flex; gap: 6px; background: var(--light); padding: 5px; border-radius: 12px; margin-bottom: 22px; }
+    .tab-btn { flex: 1; padding: 10px; border: none; border-radius: 9px; background: transparent; font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--muted); cursor: pointer; transition: background 0.2s, color 0.2s; }
+    .tab-btn.active { background: white; color: var(--maroon); box-shadow: 0 2px 8px rgba(123,16,34,0.1); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Location tab */
+    .steps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .step-box { background: var(--light); border-radius: 10px; padding: 12px 14px; display: flex; align-items: flex-start; gap: 9px; }
+    .step-num { width: 22px; height: 22px; background: var(--maroon); color: var(--yellow); border-radius: 5px; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-text { font-size: 0.76rem; color: var(--muted); line-height: 1.45; }
+    .step-text strong { color: var(--text); }
+    .field-label { display: block; font-size: 0.73rem; font-weight: 700; color: var(--maroon); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px; }
     .input-wrap { position: relative; }
-    .input-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; }
-    .link-input { width: 100%; padding: 14px 16px 14px 44px; background: white; border: 1.5px solid rgba(123,16,34,0.15); border-radius: 12px; font-family: 'Outfit', sans-serif; font-size: 0.92rem; color: var(--text-main); outline: none; transition: all 0.22s; box-shadow: 0 2px 8px rgba(123,16,34,0.04); }
-    .link-input::placeholder { color: #BFA0A8; }
-    .link-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,146,10,0.12); }
-    .link-input.valid { border-color: #22c55e; }
-    .link-input.invalid { border-color: #ef4444; }
-    .input-feedback { font-size: 0.78rem; margin-top: 6px; min-height: 18px; display: flex; align-items: center; gap: 5px; }
-    .input-feedback.ok { color: var(--green); }
+    .input-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 15px; }
+    .url-input { width: 100%; padding: 12px 14px 12px 40px; background: white; border: 1.5px solid rgba(123,16,34,0.13); border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 0.88rem; color: var(--text); outline: none; transition: border-color 0.2s; }
+    .url-input:focus   { border-color: var(--gold); }
+    .url-input.valid   { border-color: #22c55e; }
+    .url-input.invalid { border-color: #ef4444; }
+    .input-feedback { font-size: 0.75rem; margin-top: 5px; min-height: 16px; }
+    .input-feedback.ok  { color: var(--green); }
     .input-feedback.err { color: #dc2626; }
-    .btn-update { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--maroon), var(--maroon-rich)); color: var(--gold-pale); font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; box-shadow: 0 6px 24px rgba(123,16,34,0.35); transition: all 0.22s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; }
-    .btn-update:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(123,16,34,0.45); }
-    .btn-update:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .success-banner { background: var(--green-bg); border: 1px solid rgba(34,197,94,0.35); border-radius: 12px; padding: 14px 20px; display: none; align-items: center; gap: 12px; margin-top: 16px; font-size: 0.88rem; font-weight: 500; color: var(--green); }
-    .success-banner.show { display: flex; }
-    .history-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 28px 32px; margin-top: 24px; box-shadow: 0 4px 20px rgba(123,16,34,0.06); animation: fadeUp 0.5s 0.25s ease both; }
-    .hc-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 700; color: var(--maroon); margin-bottom: 18px; }
-    .log-list { display: flex; flex-direction: column; gap: 10px; }
-    .log-item { display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: var(--cream-dark); border-radius: 10px; font-size: 0.83rem; }
-    .log-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
-    .log-time { color: var(--text-muted); min-width: 90px; }
-    .log-text { color: var(--text-main); flex: 1; word-break: break-all; }
-    .log-empty { text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 24px 0; }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
-    @media (max-width: 640px) { header{padding:0 16px;} .header-page{display:none;} main{padding:28px 16px;} .status-row{grid-template-columns:1fr 1fr;} .steps{grid-template-columns:1fr;} }
+    .update-btn { width: 100%; padding: 13px; background: var(--maroon); color: var(--yellow); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.94rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 16px; transition: background 0.2s, transform 0.2s; }
+    .update-btn:hover    { background: var(--dark); transform: translateY(-1px); }
+    .update-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    /* Stops tab */
+    .stops-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .stop-row { display: flex; align-items: center; gap: 10px; background: var(--light); border-radius: 9px; padding: 10px 14px; }
+    .stop-num { width: 24px; height: 24px; background: var(--maroon); color: var(--yellow); border-radius: 6px; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .stop-input { flex: 1; background: transparent; border: none; outline: none; font-family: 'Poppins', sans-serif; font-size: 0.87rem; color: var(--text); }
+    .stop-input::placeholder { color: #BFA0A8; }
+    .stop-delete { background: none; border: none; cursor: pointer; font-size: 14px; color: #BFA0A8; padding: 2px 5px; transition: color 0.2s; }
+    .stop-delete:hover { color: #ef4444; }
+    .add-stop-btn { width: 100%; padding: 10px 16px; background: rgba(201,146,10,0.08); border: 1.5px dashed rgba(201,146,10,0.35); border-radius: 9px; color: var(--gold); font-family: 'Poppins', sans-serif; font-size: 0.84rem; font-weight: 600; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+    .add-stop-btn:hover { background: rgba(201,146,10,0.14); border-color: var(--gold); }
+    .save-stops-btn { width: 100%; padding: 13px; background: var(--gold); color: var(--dark); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.93rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 12px; transition: background 0.2s, transform 0.2s; }
+    .save-stops-btn:hover { background: var(--yellow); transform: translateY(-1px); }
+
+    .success-bar { display: none; align-items: center; gap: 10px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: var(--green); padding: 12px 16px; border-radius: 9px; font-size: 0.85rem; font-weight: 500; margin-top: 12px; }
+    .success-bar.show { display: flex; }
+
+    @media (max-width: 600px) {
+      header { padding: 0 14px; }
+      .page-label { display: none; }
+      main { padding: 28px 14px; }
+      .stats-row { grid-template-columns: 1fr; }
+      .steps-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-<div class="bg-layer"></div>
+
 <header>
   <div class="header-left">
     <div class="logo-icon">🚌</div>
-    <div class="logo-text">KLH Transport</div>
+    <span class="logo-name">KLH Transport</span>
     <div class="header-divider"></div>
-    <div class="header-page">Incharge Dashboard</div>
+    <span class="page-label">Incharge Dashboard</span>
   </div>
   <div class="header-right">
     <div class="user-chip">
       <div class="user-avatar" id="userAvatar">?</div>
-      <div><div class="user-name" id="userName">Loading...</div><div class="user-bus" id="userBusLabel">—</div></div>
+      <div>
+        <div class="user-name" id="userName">Loading...</div>
+        <div class="user-role" id="userRole">—</div>
+      </div>
     </div>
-    <button class="btn-logout" onclick="logout()">🚪 Logout</button>
+    <button class="logout-btn" onclick="logout()">🚪 Logout</button>
   </div>
 </header>
+
 <main>
-  <div class="page-header">
-    <div class="page-tag">Dashboard</div>
-    <div class="page-title" id="pageTitle">Bus Dashboard</div>
-    <p class="page-sub">Update your bus's live location so students can track it in real time.</p>
-  </div>
-  <div class="status-row">
-    <div class="status-card"><div class="status-card-icon">🚌</div><div class="status-card-label">Assigned Bus</div><div class="status-card-value" id="statBus">—</div></div>
-    <div class="status-card"><div class="status-card-icon">📡</div><div class="status-card-label">Last Update</div><div class="status-card-value" id="statTime" style="font-size:1rem;padding-top:4px">—</div></div>
-    <div class="status-card"><div class="status-card-icon">✅</div><div class="status-card-label">Updates Today</div><div class="status-card-value" id="statCount">0</div></div>
-  </div>
-  <div class="current-status">
-    <div class="cs-header">
-      <div class="cs-title">Current Live Location</div>
-      <div class="status-pill none" id="statusPill"><div class="status-dot grey"></div><span>Not Set</span></div>
+  <div class="page-tag">Dashboard</div>
+  <div class="page-title" id="pageTitle">Bus Dashboard</div>
+  <p class="page-subtitle">Update your bus's live location and stop list so students can track in real time.</p>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <span class="stat-icon">🚌</span>
+      <div class="stat-label">Assigned Bus</div>
+      <div class="stat-value" id="statBus">—</div>
     </div>
-    <div class="current-link-box" id="currentLinkBox"><span>No location set yet. Update below to go live.</span></div>
-  </div>
-  <div class="update-card">
-    <div class="uc-title">📍 Update Live Location</div>
-    <p class="uc-sub">Share your Google Maps live location link. Students will see it instantly.</p>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Open Google Maps</strong> on your phone</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Tap Share Location</strong> → Copy link</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Paste below</strong> and click Update</div></div>
+    <div class="stat-box">
+      <span class="stat-icon">✅</span>
+      <div class="stat-label">Updates Today</div>
+      <div class="stat-value" id="statCount">0</div>
     </div>
-    <label class="field-label" for="locationLink">Google Maps Live Location Link</label>
-    <div class="input-wrap">
-      <span class="input-icon">🔗</span>
-      <input type="url" id="locationLink" class="link-input" placeholder="https://maps.app.goo.gl/..." oninput="validateLink()" />
-    </div>
-    <div class="input-feedback" id="linkFeedback"></div>
-    <button class="btn-update" id="updateBtn" onclick="updateLocation()" disabled>📡 Update Live Location</button>
-    <div class="success-banner" id="successBanner">✅ Location updated successfully! Students can now see your bus live.</div>
   </div>
-  <div class="history-card">
-    <div class="hc-title">📋 Update History (This Session)</div>
-    <div class="log-list" id="logList"><div class="log-empty">No updates yet this session.</div></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Current Live Location</div>
+      <div class="status-pill not-set" id="statusPill">
+        <span class="dot"></span> Not Set
+      </div>
+    </div>
+    <div class="link-display" id="linkDisplay">
+      <span>No location set yet. Update below to go live.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('location', this)">📍 Update Location</button>
+      <button class="tab-btn"        onclick="switchTab('stops',    this)">🗺 Manage Stops</button>
+    </div>
+
+    <!-- TAB 1: Update Location -->
+    <div class="tab-panel active" id="tab-location">
+      <div class="steps-row">
+        <div class="step-box">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Open Google Maps</strong> on your phone</div>
+        </div>
+        <div class="step-box">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Share your location</strong> and copy the link</div>
+        </div>
+        <div class="step-box">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Paste below</strong> and click Update</div>
+        </div>
+      </div>
+
+      <label class="field-label" for="locationLink">Google Maps Live Location Link</label>
+      <div class="input-wrap">
+        <span class="input-icon">🔗</span>
+        <input type="url" id="locationLink" class="url-input" placeholder="https://maps.app.goo.gl/..." oninput="validateLink()" />
+      </div>
+      <div class="input-feedback" id="linkFeedback"></div>
+
+      <button class="update-btn" id="updateBtn" onclick="updateLocation()" disabled>
+        📡 Update Live Location
+      </button>
+      <div class="success-bar" id="locationSuccess">
+        ✅ Location updated! Students can now see your bus live.
+      </div>
+    </div>
+
+    <!-- TAB 2: Manage Stops -->
+    <div class="tab-panel" id="tab-stops">
+      <p style="font-size:0.83rem; color:var(--muted); margin-bottom:16px;">
+        Edit the stops that students see when they click your route. Click ✕ to remove a stop. Drag to reorder.
+      </p>
+      <div class="stops-list" id="stopsList"></div>
+      <button class="add-stop-btn" onclick="addStop()">＋ Add Stop</button>
+      <button class="save-stops-btn" onclick="saveStops()">💾 Save Stop List</button>
+      <div class="success-bar" id="stopsSuccess">
+        ✅ Stop list saved! Students will see the updated stops.
+      </div>
+    </div>
   </div>
 </main>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
   import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
+
   const firebaseConfig = {
-    apiKey: "AIzaSyDPWTpCY0kLJdPgBZBkmV32Cr53TLCFYDY",
-    authDomain: "cb-tracker-446fb.firebaseapp.com",
-    databaseURL: "https://cb-tracker-446fb-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "cb-tracker-446fb",
-    storageBucket: "cb-tracker-446fb.firebasestorage.app",
+    apiKey           : "AIzaSyDPWTpCY0kLJdPgBZBkmV32Cr53TLCFYDY",
+    authDomain       : "cb-tracker-446fb.firebaseapp.com",
+    databaseURL      : "https://cb-tracker-446fb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId        : "cb-tracker-446fb",
+    storageBucket    : "cb-tracker-446fb.firebasestorage.app",
     messagingSenderId: "565822995497",
-    appId: "1:565822995497:web:09ce8f9224eadbb2f0f038"
+    appId            : "1:565822995497:web:09ce8f9224eadbb2f0f038"
   };
   const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+  const db  = getDatabase(app);
+
   const user = JSON.parse(localStorage.getItem("loggedUser"));
   if (!user) { alert("Please login first!"); window.location.href = "login.html"; }
-  const busNum = user.bus.replace("bus","");
+
+  const busNum = user.bus.replace("bus", "");
   document.getElementById("userAvatar").textContent = busNum;
-  document.getElementById("userName").textContent = `Bus ${busNum} Incharge`;
-  document.getElementById("userBusLabel").textContent = `Assigned: Bus ${busNum}`;
-  document.getElementById("pageTitle").textContent = `Bus ${busNum} — Live Dashboard`;
-  document.getElementById("statBus").textContent = `Bus ${busNum}`;
-  async function fetchCurrent() {
+  document.getElementById("userName").textContent   = "Bus " + busNum + " Incharge";
+  document.getElementById("userRole").textContent   = "Assigned: Bus " + busNum;
+  document.getElementById("pageTitle").textContent  = "Bus " + busNum + " — Dashboard";
+  document.getElementById("statBus").textContent    = "Bus " + busNum;
+
+  // Default stops per bus (matching index.html)
+  const allDefaultStops = [
+    ["LB Nagar", "Vanasthalipuram", "Nagole", "Uppal", "KLH Campus"],
+    ["Kukatpally", "KPHB", "Miyapur", "Kondapur", "KLH Campus"],
+    ["Secunderabad", "Paradise", "Begumpet", "Ameerpet", "KLH Campus"],
+    ["Dilsukhnagar", "Kothapet", "Malakpet", "Mehdipatnam", "KLH Campus"],
+    ["Madhapur", "Hitech City", "Kondapur", "Gachibowli", "KLH Campus"],
+    ["Bowenpally", "Malkajgiri", "Trimulgherry", "SR Nagar", "KLH Campus"],
+    ["Tolichowki", "Masab Tank", "Rethibowli", "Banjara Hills", "KLH Campus"],
+    ["Ghatkesar", "Peerzadiguda", "Uppal", "Ramanthapur", "KLH Campus"],
+    ["Patancheru", "Balanagar", "Moosapet", "Bhel", "KLH Campus"],
+    ["Kompally", "Medchal", "Quthbullapur", "Nizampet", "KLH Campus"],
+    ["Vanasthalipuram", "Hayathnagar", "Saroornagar", "KLH Campus"],
+    ["Chandanagar", "Lingampally", "Miyapur", "Nizampet", "KLH Campus"],
+    ["Alwal", "Bolarum", "Malkajgiri", "Tarnaka", "KLH Campus"],
+    ["Suchitra", "Kompally", "Jeedimetla", "Balanagar", "KLH Campus"],
+    ["Hayathnagar", "Saroornagar", "LB Nagar", "Uppal", "KLH Campus"],
+    ["Mehdipatnam", "Tolichowki", "Nanalnagar", "Masab Tank", "KLH Campus"],
+    ["Moula Ali", "Nacharam", "Uppal", "Ramanthapur", "KLH Campus"],
+    ["Attapur", "Rajendranagar", "Mehdipatnam", "Tolichowki", "KLH Campus"],
+    ["Bahadurpura", "Chandrayangutta", "Falaknuma", "Saidabad", "KLH Campus"],
+    ["Charminar", "Abids", "Nampally", "Ameerpet", "KLH Campus"],
+    ["Ramanthapur", "Nacharam", "Uppal", "Malkajgiri", "KLH Campus"],
+    ["Nacharam", "Habsiguda", "Tarnaka", "Necklace Road", "KLH Campus"],
+    ["Tarnaka", "Mettuguda", "Secunderabad", "Begumpet", "KLH Campus"],
+    ["Himayatnagar", "Narayanguda", "Chaderghat", "Abids", "KLH Campus"],
+    ["Malakpet", "Kothapet", "Dilsukhnagar", "LB Nagar", "KLH Campus"],
+    ["Santoshnagar", "Saroornagar", "Champapet", "LB Nagar", "KLH Campus"],
+    ["Musheerabad", "RTC X Roads", "SR Nagar", "Ameerpet", "KLH Campus"],
+  ];
+  const myDefaultStops = allDefaultStops[parseInt(busNum) - 1] || ["Origin Stop", "Stop 2", "KLH Campus"];
+
+  async function loadCurrentLocation() {
     try {
-      const snap = await get(ref(db,"buses/"+user.bus));
-      if (snap.exists()) {
-        const link = snap.val();
-        document.getElementById("currentLinkBox").innerHTML = `<a href="${link}" target="_blank">${link}</a><button class="btn-open-link" onclick="window.open('${link}','_blank')">Open ↗</button>`;
-        document.getElementById("statusPill").innerHTML = `<div class="status-dot green"></div><span>Active</span>`;
+      const snapshot = await get(ref(db, "buses/" + user.bus));
+      if (snapshot.exists()) {
+        const link = snapshot.val();
+        document.getElementById("linkDisplay").innerHTML = `
+          <a href="${link}" target="_blank">${link}</a>
+          <button class="open-btn" onclick="window.open('${link}', '_blank')">Open ↗</button>`;
         document.getElementById("statusPill").className = "status-pill active";
-        document.getElementById("statTime").textContent = "Fetched ✓";
+        document.getElementById("statusPill").innerHTML = `<span class="dot"></span> Active`;
       }
-    } catch(e) {}
+    } catch (e) { /* silent */ }
   }
-  fetchCurrent();
-  window.validateLink = function() {
-    const val=document.getElementById("locationLink").value.trim();
-    const fb=document.getElementById("linkFeedback");
-    const btn=document.getElementById("updateBtn");
-    const inp=document.getElementById("locationLink");
-    if(!val){fb.textContent="";fb.className="input-feedback";inp.className="link-input";btn.disabled=true;return;}
-    const isGmaps=val.includes("maps.app.goo.gl")||val.includes("google.com/maps")||val.includes("goo.gl");
-    const isUrl=val.startsWith("http");
-    if(isGmaps){fb.innerHTML="✅ Valid Google Maps link";fb.className="input-feedback ok";inp.className="link-input valid";btn.disabled=false;}
-    else if(isUrl){fb.innerHTML="⚠️ Make sure it's from Google Maps";fb.className="input-feedback ok";inp.className="link-input valid";btn.disabled=false;}
-    else{fb.innerHTML="❌ Please paste a valid Google Maps link";fb.className="input-feedback err";inp.className="link-input invalid";btn.disabled=true;}
-  };
-  let updateCount=0;
-  window.updateLocation = async function() {
-    const link=document.getElementById("locationLink").value.trim();
-    if(!link)return;
-    const btn=document.getElementById("updateBtn");
-    btn.disabled=true;btn.textContent="⏳ Updating...";
+  loadCurrentLocation();
+
+  async function loadStops() {
     try {
-      await set(ref(db,"buses/"+user.bus),link);
-      const now=new Date();const timeStr=now.toLocaleTimeString();
-      updateCount++;
-      document.getElementById("statCount").textContent=updateCount;
-      document.getElementById("statTime").textContent=timeStr;
-      document.getElementById("currentLinkBox").innerHTML=`<a href="${link}" target="_blank">${link}</a><button class="btn-open-link" onclick="window.open('${link}','_blank')">Open ↗</button>`;
-      document.getElementById("statusPill").innerHTML=`<div class="status-dot green"></div><span>Active</span>`;
-      document.getElementById("statusPill").className="status-pill active";
-      const sb=document.getElementById("successBanner");sb.classList.add("show");setTimeout(()=>sb.classList.remove("show"),4000);
-      const list=document.getElementById("logList");
-      const empty=list.querySelector(".log-empty");if(empty)empty.remove();
-      const item=document.createElement("div");item.className="log-item";
-      const short=link.length>55?link.substring(0,55)+"…":link;
-      item.innerHTML=`<div class="log-dot"></div><div class="log-time">${timeStr}</div><div class="log-text">${short}</div>`;
-      list.insertBefore(item,list.firstChild);
-      document.getElementById("locationLink").value="";
-      document.getElementById("linkFeedback").textContent="";
-      document.getElementById("locationLink").className="link-input";
-    } catch(e){alert("Failed to update. Check your connection.");}
-    btn.disabled=false;btn.innerHTML="📡 Update Live Location";
+      const snapshot = await get(ref(db, "stops/" + user.bus));
+      renderStops(snapshot.exists() ? snapshot.val() : myDefaultStops);
+    } catch (e) { renderStops(myDefaultStops); }
+  }
+  loadStops();
+
+  function renderStops(stops) {
+    const list = document.getElementById("stopsList");
+    list.innerHTML = "";
+    stops.forEach((name, i) => {
+      const row = document.createElement("div");
+      row.className = "stop-row";
+      row.innerHTML = `
+        <div class="stop-num">${i + 1}</div>
+        <input class="stop-input" value="${name}" placeholder="Stop name" />
+        <button class="stop-delete" onclick="this.closest('.stop-row').remove(); renumberStops()">✕</button>`;
+      list.appendChild(row);
+    });
+  }
+
+  window.addStop = function () {
+    const list = document.getElementById("stopsList");
+    const num  = list.children.length + 1;
+    const row  = document.createElement("div");
+    row.className = "stop-row";
+    row.innerHTML = `
+      <div class="stop-num">${num}</div>
+      <input class="stop-input" placeholder="Enter stop name" />
+      <button class="stop-delete" onclick="this.closest('.stop-row').remove(); renumberStops()">✕</button>`;
+    list.appendChild(row);
+    row.querySelector("input").focus();
   };
-  window.logout=function(){localStorage.removeItem("loggedUser");window.location.href="login.html";};
+
+  window.renumberStops = function () {
+    document.querySelectorAll("#stopsList .stop-row").forEach((row, i) => {
+      row.querySelector(".stop-num").textContent = i + 1;
+    });
+  };
+
+  window.saveStops = async function () {
+    const inputs = document.querySelectorAll("#stopsList .stop-input");
+    const stops  = Array.from(inputs).map(i => i.value.trim()).filter(Boolean);
+    if (stops.length < 2) { alert("Please add at least 2 stops."); return; }
+    try {
+      await set(ref(db, "stops/" + user.bus), stops);
+      showSuccess("stopsSuccess");
+    } catch (e) { alert("Failed to save stops. Check your connection."); }
+  };
+
+  window.validateLink = function () {
+    const value    = document.getElementById("locationLink").value.trim();
+    const input    = document.getElementById("locationLink");
+    const feedback = document.getElementById("linkFeedback");
+    const btn      = document.getElementById("updateBtn");
+
+    if (!value) { input.className = "url-input"; feedback.textContent = ""; btn.disabled = true; return; }
+
+    const isGoogleMaps = value.includes("maps.app.goo.gl") || value.includes("google.com/maps") || value.includes("goo.gl");
+    const isUrl = value.startsWith("http");
+
+    if (isGoogleMaps) {
+      input.className = "url-input valid"; feedback.textContent = "✅ Valid Google Maps link"; feedback.className = "input-feedback ok"; btn.disabled = false;
+    } else if (isUrl) {
+      input.className = "url-input valid"; feedback.textContent = "⚠️ Looks like a URL — confirm it's from Google Maps"; feedback.className = "input-feedback ok"; btn.disabled = false;
+    } else {
+      input.className = "url-input invalid"; feedback.textContent = "❌ Please paste a valid Google Maps link"; feedback.className = "input-feedback err"; btn.disabled = true;
+    }
+  };
+
+  let updateCount = 0;
+
+  window.updateLocation = async function () {
+    const link = document.getElementById("locationLink").value.trim();
+    if (!link) return;
+    const btn = document.getElementById("updateBtn");
+    btn.disabled = true; btn.textContent = "⏳ Updating...";
+
+    try {
+      await set(ref(db, "buses/" + user.bus), link);
+      updateCount++;
+      document.getElementById("statCount").textContent = updateCount;
+      document.getElementById("linkDisplay").innerHTML = `
+        <a href="${link}" target="_blank">${link}</a>
+        <button class="open-btn" onclick="window.open('${link}', '_blank')">Open ↗</button>`;
+      document.getElementById("statusPill").className = "status-pill active";
+      document.getElementById("statusPill").innerHTML = `<span class="dot"></span> Active`;
+      showSuccess("locationSuccess");
+      document.getElementById("locationLink").value = "";
+      document.getElementById("linkFeedback").textContent = "";
+      document.getElementById("locationLink").className = "url-input";
+    } catch (e) { alert("Failed to update. Please check your internet connection."); }
+
+    btn.disabled = false; btn.innerHTML = "📡 Update Live Location";
+  };
+
+  window.switchTab = function (tabId, clickedBtn) {
+    document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.getElementById("tab-" + tabId).classList.add("active");
+    clickedBtn.classList.add("active");
+  };
+
+  function showSuccess(elementId) {
+    const bar = document.getElementById(elementId);
+    bar.classList.add("show");
+    setTimeout(() => bar.classList.remove("show"), 4000);
+  }
+
+  window.logout = function () {
+    localStorage.removeItem("loggedUser");
+    window.location.href = "login.html";
+  };
 </script>
 </body>
 </html>
