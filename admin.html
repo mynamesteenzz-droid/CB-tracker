@@ -1,140 +1,241 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Update Bus Location</title>
+  <meta charset="UTF-8" />
+  <title>KLH Transport — Bus Incharge Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-body {
-    font-family: 'Arial', sans-serif;
-    background: #f4f6f8;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.container {
-    background: white;
-    padding: 40px 50px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    text-align: center;
-    width: 400px;
-}
-
-h2 {
-    margin-bottom: 25px;
-    color: #6a1b9a;
-}
-
-select, input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-button {
-    width: 48%;
-    padding: 12px;
-    margin: 10px 1%;
-    background: #6a1b9a;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background: #4a148c;
-}
-
-#status {
-    margin-top: 15px;
-    color: green;
-    font-weight: bold;
-}
-</style>
+    :root {
+      --maroon:       #7B1022;
+      --maroon-deep:  #4E0A16;
+      --maroon-rich:  #9B1A30;
+      --gold:         #C9920A;
+      --gold-bright:  #E8B020;
+      --gold-pale:    #F5D878;
+      --gold-glow:    rgba(201,146,10,0.35);
+      --cream:        #FDF8EE;
+      --cream-dark:   #F2E8D0;
+      --border:       rgba(201,146,10,0.2);
+      --text-main:    #1A0509;
+      --text-muted:   #7A4050;
+      --card-bg:      rgba(255,252,244,0.95);
+      --green:        #16a34a;
+      --green-bg:     rgba(34,197,94,0.1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--text-main); min-height: 100vh; }
+    .bg-layer { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse 70% 50% at 5% 15%, rgba(123,16,34,0.07), transparent 55%), radial-gradient(ellipse 50% 40% at 95% 85%, rgba(201,146,10,0.05), transparent 50%), var(--cream); }
+    header { background: rgba(78,10,22,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(201,146,10,0.3); padding: 0 40px; height: 68px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 24px rgba(0,0,0,0.2); }
+    .header-left { display: flex; align-items: center; gap: 16px; }
+    .logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--gold), var(--gold-bright)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 0 16px var(--gold-glow); }
+    .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: var(--gold-pale); }
+    .header-divider { width: 1px; height: 28px; background: rgba(201,146,10,0.2); margin: 0 4px; }
+    .header-page { font-size: 0.82rem; color: rgba(245,216,120,0.55); letter-spacing: 1px; text-transform: uppercase; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .user-chip { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.06); border: 1px solid rgba(201,146,10,0.2); border-radius: 10px; padding: 8px 16px; }
+    .user-avatar { width: 30px; height: 30px; background: linear-gradient(135deg, var(--gold), var(--gold-bright)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--maroon-deep); }
+    .user-name { font-size: 0.85rem; font-weight: 600; color: var(--gold-pale); }
+    .user-bus { font-size: 0.7rem; color: rgba(245,216,120,0.55); }
+    .btn-logout { display: flex; align-items: center; gap: 7px; background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25); color: #fca5a5; padding: 8px 16px; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .btn-logout:hover { background: rgba(239,68,68,0.2); color: #ef4444; }
+    main { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+    .page-header { margin-bottom: 40px; animation: fadeUp 0.5s ease both; }
+    .page-tag { display: inline-flex; align-items: center; gap: 7px; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .page-tag::before { content: ''; width: 22px; height: 2px; background: var(--gold); }
+    .page-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--maroon-deep); margin-bottom: 6px; }
+    .page-sub { font-size: 0.9rem; color: var(--text-muted); }
+    .status-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; animation: fadeUp 0.5s 0.1s ease both; }
+    .status-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; box-shadow: 0 4px 20px rgba(123,16,34,0.06); }
+    .status-card-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); margin-bottom: 6px; }
+    .status-card-value { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--maroon); }
+    .status-card-icon { font-size: 1.4rem; float: right; margin-top: -2px; opacity: 0.6; }
+    .current-status { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 6px 30px rgba(123,16,34,0.07); animation: fadeUp 0.5s 0.15s ease both; }
+    .cs-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .cs-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: var(--maroon); }
+    .status-pill { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
+    .status-pill.none { background: rgba(123,16,34,0.08); color: var(--text-muted); }
+    .status-pill.active { background: var(--green-bg); border: 1px solid rgba(34,197,94,0.3); color: var(--green); }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .status-dot.green { background: #22c55e; animation: pulse-dot 1.5s infinite; box-shadow: 0 0 6px #22c55e; }
+    .status-dot.grey { background: #9ca3af; }
+    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .current-link-box { background: var(--cream-dark); border: 1.5px dashed var(--border); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 0.85rem; color: var(--text-muted); word-break: break-all; }
+    .current-link-box a { color: var(--maroon); text-decoration: none; flex: 1; }
+    .current-link-box a:hover { color: var(--gold); }
+    .btn-open-link { background: rgba(123,16,34,0.08); border: 1px solid rgba(123,16,34,0.15); color: var(--maroon); padding: 7px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+    .btn-open-link:hover { background: var(--maroon); color: white; }
+    .update-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 32px; box-shadow: 0 6px 30px rgba(123,16,34,0.07); animation: fadeUp 0.5s 0.2s ease both; }
+    .uc-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--maroon); margin-bottom: 6px; }
+    .uc-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 28px; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+    .step { background: var(--cream-dark); border-radius: 12px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px; }
+    .step-num { width: 24px; height: 24px; background: linear-gradient(135deg, var(--maroon), var(--maroon-rich)); color: var(--gold-pale); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .step-text { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+    .step-text strong { color: var(--text-main); }
+    .field-label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--maroon); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .input-wrap { position: relative; }
+    .input-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; }
+    .link-input { width: 100%; padding: 14px 16px 14px 44px; background: white; border: 1.5px solid rgba(123,16,34,0.15); border-radius: 12px; font-family: 'Outfit', sans-serif; font-size: 0.92rem; color: var(--text-main); outline: none; transition: all 0.22s; box-shadow: 0 2px 8px rgba(123,16,34,0.04); }
+    .link-input::placeholder { color: #BFA0A8; }
+    .link-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,146,10,0.12); }
+    .link-input.valid { border-color: #22c55e; }
+    .link-input.invalid { border-color: #ef4444; }
+    .input-feedback { font-size: 0.78rem; margin-top: 6px; min-height: 18px; display: flex; align-items: center; gap: 5px; }
+    .input-feedback.ok { color: var(--green); }
+    .input-feedback.err { color: #dc2626; }
+    .btn-update { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--maroon), var(--maroon-rich)); color: var(--gold-pale); font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; box-shadow: 0 6px 24px rgba(123,16,34,0.35); transition: all 0.22s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; }
+    .btn-update:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(123,16,34,0.45); }
+    .btn-update:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .success-banner { background: var(--green-bg); border: 1px solid rgba(34,197,94,0.35); border-radius: 12px; padding: 14px 20px; display: none; align-items: center; gap: 12px; margin-top: 16px; font-size: 0.88rem; font-weight: 500; color: var(--green); }
+    .success-banner.show { display: flex; }
+    .history-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 28px 32px; margin-top: 24px; box-shadow: 0 4px 20px rgba(123,16,34,0.06); animation: fadeUp 0.5s 0.25s ease both; }
+    .hc-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 700; color: var(--maroon); margin-bottom: 18px; }
+    .log-list { display: flex; flex-direction: column; gap: 10px; }
+    .log-item { display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: var(--cream-dark); border-radius: 10px; font-size: 0.83rem; }
+    .log-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+    .log-time { color: var(--text-muted); min-width: 90px; }
+    .log-text { color: var(--text-main); flex: 1; word-break: break-all; }
+    .log-empty { text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 24px 0; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    @media (max-width: 640px) { header{padding:0 16px;} .header-page{display:none;} main{padding:28px 16px;} .status-row{grid-template-columns:1fr 1fr;} .steps{grid-template-columns:1fr;} }
+  </style>
 </head>
-
 <body>
-
-<body>
-<div class="container">
-    <h2>Update Bus Location</h2>
-
-    <select id="busSelect"></select><br>
-    <input type="text" id="locationLink" placeholder="Paste Google Maps Live Location"><br>
-
-    <button onclick="updateBus()">Update Location</button>
-    <button onclick="logout()">Logout</button>
-
-    <p id="status"></p>
-</div>
-
+<div class="bg-layer"></div>
+<header>
+  <div class="header-left">
+    <div class="logo-icon">🚌</div>
+    <div class="logo-text">KLH Transport</div>
+    <div class="header-divider"></div>
+    <div class="header-page">Incharge Dashboard</div>
+  </div>
+  <div class="header-right">
+    <div class="user-chip">
+      <div class="user-avatar" id="userAvatar">?</div>
+      <div><div class="user-name" id="userName">Loading...</div><div class="user-bus" id="userBusLabel">—</div></div>
+    </div>
+    <button class="btn-logout" onclick="logout()">🚪 Logout</button>
+  </div>
+</header>
+<main>
+  <div class="page-header">
+    <div class="page-tag">Dashboard</div>
+    <div class="page-title" id="pageTitle">Bus Dashboard</div>
+    <p class="page-sub">Update your bus's live location so students can track it in real time.</p>
+  </div>
+  <div class="status-row">
+    <div class="status-card"><div class="status-card-icon">🚌</div><div class="status-card-label">Assigned Bus</div><div class="status-card-value" id="statBus">—</div></div>
+    <div class="status-card"><div class="status-card-icon">📡</div><div class="status-card-label">Last Update</div><div class="status-card-value" id="statTime" style="font-size:1rem;padding-top:4px">—</div></div>
+    <div class="status-card"><div class="status-card-icon">✅</div><div class="status-card-label">Updates Today</div><div class="status-card-value" id="statCount">0</div></div>
+  </div>
+  <div class="current-status">
+    <div class="cs-header">
+      <div class="cs-title">Current Live Location</div>
+      <div class="status-pill none" id="statusPill"><div class="status-dot grey"></div><span>Not Set</span></div>
+    </div>
+    <div class="current-link-box" id="currentLinkBox"><span>No location set yet. Update below to go live.</span></div>
+  </div>
+  <div class="update-card">
+    <div class="uc-title">📍 Update Live Location</div>
+    <p class="uc-sub">Share your Google Maps live location link. Students will see it instantly.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Open Google Maps</strong> on your phone</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Tap Share Location</strong> → Copy link</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Paste below</strong> and click Update</div></div>
+    </div>
+    <label class="field-label" for="locationLink">Google Maps Live Location Link</label>
+    <div class="input-wrap">
+      <span class="input-icon">🔗</span>
+      <input type="url" id="locationLink" class="link-input" placeholder="https://maps.app.goo.gl/..." oninput="validateLink()" />
+    </div>
+    <div class="input-feedback" id="linkFeedback"></div>
+    <button class="btn-update" id="updateBtn" onclick="updateLocation()" disabled>📡 Update Live Location</button>
+    <div class="success-banner" id="successBanner">✅ Location updated successfully! Students can now see your bus live.</div>
+  </div>
+  <div class="history-card">
+    <div class="hc-title">📋 Update History (This Session)</div>
+    <div class="log-list" id="logList"><div class="log-empty">No updates yet this session.</div></div>
+  </div>
+</main>
 <script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "cb-tracker-446fb.firebaseapp.com",
-  databaseURL: "https://cb-tracker-446fb-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "cb-tracker-446fb",
-  storageBucket: "cb-tracker-446fb.firebasestorage.app",
-  messagingSenderId: "565822995497",
-  appId: "1:565822995497:web:09ce8f9224eadbb2f0f038"
-};
-
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-
-// Check login
-const user = JSON.parse(localStorage.getItem("loggedUser"));
-if(!user){
-  alert("Please login first!");
-  window.location.href = "login.html";
-}
-
-// Create bus dropdown
-for(let i=1; i<=27; i++){
-  const option = document.createElement("option");
-  option.value = "bus"+i;
-  option.textContent = "Bus "+i;
-  document.getElementById("busSelect").appendChild(option);
-}
-
-// Restrict each bus incharge to only their bus
-document.getElementById("busSelect").value = user.bus;
-document.getElementById("busSelect").disabled = true;
-
-// Update function
-window.updateBus = function(){
-  let bus = document.getElementById("busSelect").value;
-  let link = document.getElementById("locationLink").value.trim();
-
-  if(link==""){
-    alert("Paste the location first!");
-    return;
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+  import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyDPWTpCY0kLJdPgBZBkmV32Cr53TLCFYDY",
+    authDomain: "cb-tracker-446fb.firebaseapp.com",
+    databaseURL: "https://cb-tracker-446fb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "cb-tracker-446fb",
+    storageBucket: "cb-tracker-446fb.firebasestorage.app",
+    messagingSenderId: "565822995497",
+    appId: "1:565822995497:web:09ce8f9224eadbb2f0f038"
+  };
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const user = JSON.parse(localStorage.getItem("loggedUser"));
+  if (!user) { alert("Please login first!"); window.location.href = "login.html"; }
+  const busNum = user.bus.replace("bus","");
+  document.getElementById("userAvatar").textContent = busNum;
+  document.getElementById("userName").textContent = `Bus ${busNum} Incharge`;
+  document.getElementById("userBusLabel").textContent = `Assigned: Bus ${busNum}`;
+  document.getElementById("pageTitle").textContent = `Bus ${busNum} — Live Dashboard`;
+  document.getElementById("statBus").textContent = `Bus ${busNum}`;
+  async function fetchCurrent() {
+    try {
+      const snap = await get(ref(db,"buses/"+user.bus));
+      if (snap.exists()) {
+        const link = snap.val();
+        document.getElementById("currentLinkBox").innerHTML = `<a href="${link}" target="_blank">${link}</a><button class="btn-open-link" onclick="window.open('${link}','_blank')">Open ↗</button>`;
+        document.getElementById("statusPill").innerHTML = `<div class="status-dot green"></div><span>Active</span>`;
+        document.getElementById("statusPill").className = "status-pill active";
+        document.getElementById("statTime").textContent = "Fetched ✓";
+      }
+    } catch(e) {}
   }
-
-  set(ref(database,"buses/"+bus), link);
-  document.getElementById("status").innerText="Location Updated!";
-}
-
-// Logout
-window.logout = function(){
-  localStorage.removeItem("loggedUser");
-  window.location.href = "login.html";
-}
-
+  fetchCurrent();
+  window.validateLink = function() {
+    const val=document.getElementById("locationLink").value.trim();
+    const fb=document.getElementById("linkFeedback");
+    const btn=document.getElementById("updateBtn");
+    const inp=document.getElementById("locationLink");
+    if(!val){fb.textContent="";fb.className="input-feedback";inp.className="link-input";btn.disabled=true;return;}
+    const isGmaps=val.includes("maps.app.goo.gl")||val.includes("google.com/maps")||val.includes("goo.gl");
+    const isUrl=val.startsWith("http");
+    if(isGmaps){fb.innerHTML="✅ Valid Google Maps link";fb.className="input-feedback ok";inp.className="link-input valid";btn.disabled=false;}
+    else if(isUrl){fb.innerHTML="⚠️ Make sure it's from Google Maps";fb.className="input-feedback ok";inp.className="link-input valid";btn.disabled=false;}
+    else{fb.innerHTML="❌ Please paste a valid Google Maps link";fb.className="input-feedback err";inp.className="link-input invalid";btn.disabled=true;}
+  };
+  let updateCount=0;
+  window.updateLocation = async function() {
+    const link=document.getElementById("locationLink").value.trim();
+    if(!link)return;
+    const btn=document.getElementById("updateBtn");
+    btn.disabled=true;btn.textContent="⏳ Updating...";
+    try {
+      await set(ref(db,"buses/"+user.bus),link);
+      const now=new Date();const timeStr=now.toLocaleTimeString();
+      updateCount++;
+      document.getElementById("statCount").textContent=updateCount;
+      document.getElementById("statTime").textContent=timeStr;
+      document.getElementById("currentLinkBox").innerHTML=`<a href="${link}" target="_blank">${link}</a><button class="btn-open-link" onclick="window.open('${link}','_blank')">Open ↗</button>`;
+      document.getElementById("statusPill").innerHTML=`<div class="status-dot green"></div><span>Active</span>`;
+      document.getElementById("statusPill").className="status-pill active";
+      const sb=document.getElementById("successBanner");sb.classList.add("show");setTimeout(()=>sb.classList.remove("show"),4000);
+      const list=document.getElementById("logList");
+      const empty=list.querySelector(".log-empty");if(empty)empty.remove();
+      const item=document.createElement("div");item.className="log-item";
+      const short=link.length>55?link.substring(0,55)+"…":link;
+      item.innerHTML=`<div class="log-dot"></div><div class="log-time">${timeStr}</div><div class="log-text">${short}</div>`;
+      list.insertBefore(item,list.firstChild);
+      document.getElementById("locationLink").value="";
+      document.getElementById("linkFeedback").textContent="";
+      document.getElementById("locationLink").className="link-input";
+    } catch(e){alert("Failed to update. Check your connection.");}
+    btn.disabled=false;btn.innerHTML="📡 Update Live Location";
+  };
+  window.logout=function(){localStorage.removeItem("loggedUser");window.location.href="login.html";};
 </script>
-
 </body>
 </html>
+
 
