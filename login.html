@@ -7,74 +7,54 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --maroon : #7B1022; --dark   : #4E0A16; --gold   : #C9920A;
-      --yellow : #E8B020; --cream  : #FDF8EE; --light  : #F2E8D0;
-      --text   : #1A0509; --muted  : #7A4050; --border : rgba(201,146,10,0.25);
+      --forest : #1A4731; --dark   : #0C2B1C; --sage   : #2D8653;
+      --mint   : #86EFAC; --cream  : #EDFAF3; --light  : #D9F2E6;
+      --text   : #0C2B1C; --muted  : #4A7A5E; --border : rgba(29,122,69,0.2);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Poppins', sans-serif; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; background: var(--cream); }
-
-    .left-panel { background: linear-gradient(145deg, var(--dark) 0%, var(--maroon) 100%); display: flex; flex-direction: column; justify-content: center; padding: 60px 50px; position: relative; overflow: hidden; }
+    .left-panel { background: linear-gradient(145deg, var(--dark) 0%, var(--forest) 100%); display: flex; flex-direction: column; justify-content: center; padding: 60px 50px; position: relative; overflow: hidden; }
     .left-panel::after { content:'🚌'; position: absolute; bottom:-20px; right:-20px; font-size:10rem; opacity:0.06; transform:rotate(-20deg); }
-
     .brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 50px; }
-    .brand-icon { width: 42px; height: 42px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-    .brand-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--yellow); }
-    .brand-tagline { display: block; font-size: 0.6rem; color: rgba(232,176,32,0.5); letter-spacing: 2px; text-transform: uppercase; }
-
+    .brand-icon { width: 42px; height: 42px; background: var(--sage); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .brand-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--mint); }
+    .brand-tagline { display: block; font-size: 0.6rem; color: rgba(134,239,172,0.5); letter-spacing: 2px; text-transform: uppercase; }
     .left-panel h1 { font-family: 'Playfair Display', serif; font-size: 2.6rem; color: white; line-height: 1.1; margin-bottom: 14px; }
-    .left-panel h1 em { color: var(--yellow); font-style: italic; }
+    .left-panel h1 em { color: var(--mint); font-style: italic; }
     .left-panel p { font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 300px; }
-
     .right-panel { display: flex; align-items: center; justify-content: center; padding: 40px; }
     .form-wrapper { width: 100%; max-width: 380px; }
-
-    .form-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .form-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 8px; }
     .form-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--dark); margin-bottom: 4px; }
     .form-subtitle { font-size: 0.85rem; color: var(--muted); margin-bottom: 28px; }
-
     .field { margin-bottom: 18px; }
-    .field label { display: block; font-size: 0.74rem; font-weight: 600; color: var(--maroon); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .field label { display: block; font-size: 0.74rem; font-weight: 600; color: var(--forest); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
     .input-wrap { position: relative; }
     .input-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 15px; pointer-events: none; }
-    .input-wrap input { width: 100%; padding: 12px 14px 12px 38px; background: white; border: 1.5px solid rgba(123,16,34,0.15); border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: var(--text); outline: none; transition: border-color 0.2s; }
-    .input-wrap input:focus { border-color: var(--gold); }
-    .input-wrap input::placeholder { color: #BFA0A8; }
-    .toggle-pw { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 14px; color: #BFA0A8; transition: color 0.2s; }
-    .toggle-pw:hover { color: var(--maroon); }
-
-    .login-btn { width: 100%; padding: 13px; background: var(--maroon); color: var(--yellow); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.95rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 6px; transition: background 0.2s, transform 0.2s; }
+    .input-wrap input { width: 100%; padding: 12px 14px 12px 38px; background: white; border: 1.5px solid rgba(26,71,49,0.15); border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: var(--text); outline: none; transition: border-color 0.2s; }
+    .input-wrap input:focus { border-color: var(--sage); }
+    .input-wrap input::placeholder { color: #A0C4B0; }
+    .toggle-pw { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 14px; color: #A0C4B0; transition: color 0.2s; }
+    .toggle-pw:hover { color: var(--forest); }
+    .login-btn { width: 100%; padding: 13px; background: var(--forest); color: var(--mint); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.95rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 6px; transition: background 0.2s, transform 0.2s; }
     .login-btn:hover { background: var(--dark); transform: translateY(-2px); }
-
     .error-msg { display: none; align-items: center; gap: 8px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); color: #dc2626; padding: 10px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 500; margin-top: 12px; }
     .error-msg.show { display: flex; }
-
     .divider { display: flex; align-items: center; gap: 12px; margin: 22px 0; }
-    .divider::before, .divider::after { content:''; flex:1; height:1px; background: rgba(123,16,34,0.1); }
-    .divider span { font-size: 0.72rem; color: #BFA0A8; white-space: nowrap; }
-
-    .hint-box { background: rgba(201,146,10,0.07); border: 1px solid rgba(201,146,10,0.2); border-radius: 8px; padding: 12px 14px; font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
-    .hint-box strong { color: var(--maroon); }
-
-    .back-link { display: block; text-align: center; margin-top: 22px; color: var(--maroon); font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: color 0.2s; }
-    .back-link:hover { color: var(--gold); }
-
-    @media (max-width: 768px) {
-      body { grid-template-columns: 1fr; }
-      .left-panel { display: none; }
-      .right-panel { padding: 28px 20px; min-height: 100vh; }
-    }
+    .divider::before, .divider::after { content:''; flex:1; height:1px; background: rgba(26,71,49,0.1); }
+    .divider span { font-size: 0.72rem; color: #A0C4B0; white-space: nowrap; }
+    .hint-box { background: rgba(29,122,69,0.07); border: 1px solid rgba(29,122,69,0.2); border-radius: 8px; padding: 12px 14px; font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .hint-box strong { color: var(--forest); }
+    .back-link { display: block; text-align: center; margin-top: 22px; color: var(--forest); font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--sage); }
+    @media (max-width: 768px) { body { grid-template-columns: 1fr; } .left-panel { display: none; } .right-panel { padding: 28px 20px; min-height: 100vh; } }
   </style>
 </head>
 <body>
-
 <div class="left-panel">
   <div class="brand-logo">
     <div class="brand-icon">🚌</div>
-    <div>
-      <div class="brand-name">KLH Transport</div>
-      <span class="brand-tagline">Smart Campus Tracker</span>
-    </div>
+    <div><div class="brand-name">KLH Transport</div><span class="brand-tagline">Smart Campus Tracker</span></div>
   </div>
   <h1>Bus Incharge<br/><em>Portal</em></h1>
   <p>Log in to update your bus's live location and stop list so students can track in real time.</p>
@@ -85,7 +65,6 @@
     <div class="form-label">Staff Portal</div>
     <div class="form-title">Welcome Back</div>
     <p class="form-subtitle">Sign in with your bus incharge credentials</p>
-
     <div class="field">
       <label for="email">Email Address</label>
       <div class="input-wrap">
@@ -93,7 +72,6 @@
         <input type="email" id="email" placeholder="bus1@klh.com" autocomplete="email" />
       </div>
     </div>
-
     <div class="field">
       <label for="password">Password</label>
       <div class="input-wrap">
@@ -102,31 +80,114 @@
         <button class="toggle-pw" type="button" id="toggleBtn" onclick="togglePassword()">👁</button>
       </div>
     </div>
-
     <button class="login-btn" onclick="login()">🔐 Sign In</button>
-
-    <div class="error-msg" id="errorMsg">
-      <span>❌</span>
-      <span id="errorText">Wrong email or password.</span>
-    </div>
-
+    <div class="error-msg" id="errorMsg"><span>❌</span><span id="errorText">Wrong email or password.</span></div>
     <div class="divider"><span>Credentials format</span></div>
-
     <div class="hint-box">
       <strong>Email:</strong> bus[N]@klh.com &nbsp;·&nbsp; <strong>Password:</strong> bus[N]pass<br/>
       Example: <code>bus1@klh.com</code> / <code>bus1pass</code>
     </div>
-
     <a href="index.html" class="back-link">← Back to Student Tracker</a>
   </div>
 </div>
 
 <script>
-  const users = Array.from({ length: 27 }, (_, i) => ({
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC 4 — DIVISION METHOD (Hash Function)
+  // TOPIC 5 — SEPARATE CHAINING (Collision Resolution)
+  // All 27 staff credentials are stored in a hash table.
+  // h(k) = emailKey mod TABLE_SIZE
+  // Collisions resolved with Separate Chaining (array of lists).
+  // ═══════════════════════════════════════════════════════════
+  const TABLE_SIZE = 13; // prime table size
+
+  // Division method: hash an email string to a slot
+  function hashEmail(email) {
+    let sum = 0;
+    for (let i = 0; i < email.length; i++) {
+      sum += email.charCodeAt(i); // sum of char codes
+    }
+    return sum % TABLE_SIZE; // h(k) = k mod m  — Division Method
+  }
+
+  // Separate Chaining: each slot holds a list (array) of entries
+  const credentialTable = new Array(TABLE_SIZE).fill(null).map(() => []); // chains
+
+  function chainInsert(email, password, bus) {
+    const slot = hashEmail(email);
+    credentialTable[slot].push({ email, password, bus }); // append to chain at slot
+  }
+
+  function chainSearch(email, password) {
+    const slot  = hashEmail(email);
+    const chain = credentialTable[slot]; // get the chain at this slot
+    // Search through the chain (Separate Chaining: Search)
+    for (const entry of chain) {
+      if (entry.email === email && entry.password === password) return entry;
+    }
+    return null; // not found in chain
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC 1 — INSERTION SORT (alternative sort used here)
+  // Actually: BUBBLE SORT used to sort credential list before inserting
+  // so the hash table is populated in bus-number order.
+  // ═══════════════════════════════════════════════════════════
+  function bubbleSort(arr, compareFn) {
+    const a = [...arr];
+    for (let i = 0; i < a.length - 1; i++) {
+      for (let j = 0; j < a.length - i - 1; j++) {
+        if (compareFn(a[j], a[j+1]) > 0) [a[j], a[j+1]] = [a[j+1], a[j]];
+      }
+    }
+    return a;
+  }
+
+  // Build unsorted raw credentials, then bubble sort by bus number, then insert
+  let rawCreds = Array.from({ length: 27 }, (_, i) => ({
     email   : `bus${i + 1}@klh.com`,
     password: `bus${i + 1}pass`,
-    bus     : `bus${i + 1}`
+    bus     : `bus${i + 1}`,
+    busNum  : i + 1
   }));
+
+  // Bubble sort by bus number (ascending) before inserting into hash table
+  const sortedCreds = bubbleSort(rawCreds, (a, b) => a.busNum - b.busNum);
+  sortedCreds.forEach(c => chainInsert(c.email, c.password, c.bus));
+
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC 3 — STACK
+  // Login attempt history stored in a Stack (LIFO).
+  // Each failed attempt is pushed; used for audit/security.
+  // ═══════════════════════════════════════════════════════════
+  class LoginAttemptStack {
+    constructor() { this.items = []; }
+    push(attempt)  { this.items.push(attempt); }          // LIFO push
+    pop()          { return this.items.pop(); }            // LIFO pop
+    peek()         { return this.items[this.items.length - 1]; }
+    isEmpty()      { return this.items.length === 0; }
+    size()         { return this.items.length; }
+  }
+
+  const attemptStack = new LoginAttemptStack();
+
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC 2 — DOUBLY LINKED LIST
+  // Login history (email attempts) stored as a DLL so we can
+  // traverse forward and backward through login attempts.
+  // ═══════════════════════════════════════════════════════════
+  class AttemptNode {
+    constructor(email, time) { this.email = email; this.time = time; this.next = null; this.prev = null; }
+  }
+  class AttemptDLL {
+    constructor() { this.head = null; this.tail = null; }
+    append(email, time) {
+      const node = new AttemptNode(email, time);
+      if (!this.tail) { this.head = node; this.tail = node; }
+      else { node.prev = this.tail; this.tail.next = node; this.tail = node; }
+    }
+  }
+  const attemptLog = new AttemptDLL();
 
   function togglePassword() {
     const input = document.getElementById("password");
@@ -146,12 +207,20 @@
       errorDiv.classList.add("show"); return;
     }
 
-    const match = users.find(u => u.email === email && u.password === password);
+    // Log attempt into DLL (Doubly Linked List)
+    attemptLog.append(email, new Date().toLocaleTimeString());
+
+    // Search credentials using hash table (Division Method + Separate Chaining)
+    const match = chainSearch(email, password);
+
     if (match) {
       localStorage.setItem("loggedUser", JSON.stringify(match));
       window.location.href = "admin.html";
     } else {
-      errorTxt.textContent = "Wrong email or password. Try bus1@klh.com / bus1pass";
+      // Push failed attempt onto Stack (LIFO)
+      attemptStack.push({ email, time: new Date().toLocaleTimeString() });
+      const count = attemptStack.size();
+      errorTxt.textContent = `Wrong email or password. (Attempt ${count}) Try bus1@klh.com / bus1pass`;
       errorDiv.classList.add("show");
     }
   }
