@@ -7,110 +7,93 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --maroon : #7B1022; --dark   : #4E0A16; --gold   : #C9920A;
-      --yellow : #E8B020; --cream  : #FDF8EE; --light  : #F2E8D0;
-      --text   : #1A0509; --muted  : #7A4050; --border : rgba(201,146,10,0.25);
+      --forest : #1A4731; --dark   : #0C2B1C; --sage   : #2D8653;
+      --mint   : #86EFAC; --cream  : #EDFAF3; --light  : #D9F2E6;
+      --text   : #0C2B1C; --muted  : #4A7A5E; --border : rgba(29,122,69,0.2);
       --green  : #16a34a;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Poppins', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
-
-    header { position: sticky; top: 0; z-index: 100; height: 65px; background: var(--dark); border-bottom: 2px solid var(--gold); display: flex; align-items: center; justify-content: space-between; padding: 0 36px; }
+    header { position: sticky; top: 0; z-index: 100; height: 65px; background: var(--dark); border-bottom: 2px solid var(--sage); display: flex; align-items: center; justify-content: space-between; padding: 0 36px; }
     .header-left { display: flex; align-items: center; gap: 14px; }
-    .logo-icon { width: 34px; height: 34px; background: var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
-    .logo-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--yellow); }
-    .header-divider { width: 1px; height: 24px; background: rgba(201,146,10,0.2); }
-    .page-label { font-size: 0.78rem; color: rgba(232,176,32,0.5); letter-spacing: 1px; text-transform: uppercase; }
+    .logo-icon { width: 34px; height: 34px; background: var(--sage); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+    .logo-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--mint); }
+    .header-divider { width: 1px; height: 24px; background: rgba(134,239,172,0.2); }
+    .page-label { font-size: 0.78rem; color: rgba(134,239,172,0.5); letter-spacing: 1px; text-transform: uppercase; }
     .header-right { display: flex; align-items: center; gap: 10px; }
-    .user-chip { display: flex; align-items: center; gap: 9px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,146,10,0.2); border-radius: 9px; padding: 7px 14px; }
-    .user-avatar { width: 28px; height: 28px; background: var(--gold); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--dark); }
-    .user-name { font-size: 0.82rem; font-weight: 600; color: var(--yellow); }
-    .user-role { font-size: 0.66rem; color: rgba(232,176,32,0.5); }
+    .user-chip { display: flex; align-items: center; gap: 9px; background: rgba(255,255,255,0.05); border: 1px solid rgba(134,239,172,0.2); border-radius: 9px; padding: 7px 14px; }
+    .user-avatar { width: 28px; height: 28px; background: var(--sage); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; }
+    .user-name { font-size: 0.82rem; font-weight: 600; color: var(--mint); }
+    .user-role { font-size: 0.66rem; color: rgba(134,239,172,0.5); }
     .logout-btn { display: flex; align-items: center; gap: 6px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); color: #fca5a5; padding: 7px 14px; border-radius: 7px; font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s, color 0.2s; }
     .logout-btn:hover { background: rgba(239,68,68,0.2); color: #ef4444; }
-
     main { max-width: 840px; margin: 0 auto; padding: 44px 20px; }
-    .page-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .page-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 6px; }
     .page-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--dark); margin-bottom: 4px; }
     .page-subtitle { font-size: 0.87rem; color: var(--muted); margin-bottom: 32px; }
-
-    .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 26px; }
-    .stat-box { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; box-shadow: 0 3px 14px rgba(123,16,34,0.05); }
+    .stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 26px; }
+    .stat-box { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; box-shadow: 0 3px 14px rgba(26,71,49,0.05); }
     .stat-box .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
-    .stat-box .stat-value { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--maroon); }
+    .stat-box .stat-value { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--forest); }
     .stat-box .stat-icon { float: right; font-size: 1.2rem; opacity: 0.5; }
-
-    .card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 26px; box-shadow: 0 4px 20px rgba(123,16,34,0.06); margin-bottom: 20px; }
+    .card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 26px; box-shadow: 0 4px 20px rgba(26,71,49,0.06); margin-bottom: 20px; }
     .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-    .card-title { font-family: 'Playfair Display', serif; font-size: 1.18rem; color: var(--maroon); }
-
+    .card-title { font-family: 'Playfair Display', serif; font-size: 1.18rem; color: var(--forest); }
     .status-pill { display: flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 50px; font-size: 0.72rem; font-weight: 700; }
-    .status-pill.not-set { background: rgba(123,16,34,0.07); color: var(--muted); }
+    .status-pill.not-set { background: rgba(26,71,49,0.07); color: var(--muted); }
     .status-pill.active  { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: var(--green); }
     .status-pill .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
     .status-pill.not-set .dot { background: #9ca3af; }
     .status-pill.active  .dot { background: #22c55e; animation: pulse 1.5s infinite; }
     @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
-
     .link-display { background: var(--light); border: 1.5px dashed var(--border); border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 0.82rem; color: var(--muted); word-break: break-all; }
-    .link-display a { color: var(--maroon); text-decoration: none; flex: 1; }
-    .link-display a:hover { color: var(--gold); }
-    .open-btn { background: rgba(123,16,34,0.07); border: 1px solid rgba(123,16,34,0.14); color: var(--maroon); padding: 6px 12px; border-radius: 7px; font-size: 0.76rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s, color 0.2s; }
-    .open-btn:hover { background: var(--maroon); color: white; }
-
+    .link-display a { color: var(--forest); text-decoration: none; flex: 1; }
+    .link-display a:hover { color: var(--sage); }
+    .open-btn { background: rgba(26,71,49,0.07); border: 1px solid rgba(26,71,49,0.14); color: var(--forest); padding: 6px 12px; border-radius: 7px; font-size: 0.76rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s, color 0.2s; }
+    .open-btn:hover { background: var(--forest); color: white; }
     .tabs { display: flex; gap: 6px; background: var(--light); padding: 5px; border-radius: 12px; margin-bottom: 22px; }
     .tab-btn { flex: 1; padding: 10px; border: none; border-radius: 9px; background: transparent; font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--muted); cursor: pointer; transition: background 0.2s, color 0.2s; }
-    .tab-btn.active { background: white; color: var(--maroon); box-shadow: 0 2px 8px rgba(123,16,34,0.1); }
+    .tab-btn.active { background: white; color: var(--forest); box-shadow: 0 2px 8px rgba(26,71,49,0.1); }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
-
-    /* Location tab */
     .steps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
     .step-box { background: var(--light); border-radius: 10px; padding: 12px 14px; display: flex; align-items: flex-start; gap: 9px; }
-    .step-num { width: 22px; height: 22px; background: var(--maroon); color: var(--yellow); border-radius: 5px; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-num { width: 22px; height: 22px; background: var(--forest); color: var(--mint); border-radius: 5px; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .step-text { font-size: 0.76rem; color: var(--muted); line-height: 1.45; }
     .step-text strong { color: var(--text); }
-    .field-label { display: block; font-size: 0.73rem; font-weight: 700; color: var(--maroon); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px; }
+    .field-label { display: block; font-size: 0.73rem; font-weight: 700; color: var(--forest); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px; }
     .input-wrap { position: relative; }
     .input-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 15px; }
-    .url-input { width: 100%; padding: 12px 14px 12px 40px; background: white; border: 1.5px solid rgba(123,16,34,0.13); border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 0.88rem; color: var(--text); outline: none; transition: border-color 0.2s; }
-    .url-input:focus   { border-color: var(--gold); }
+    .url-input { width: 100%; padding: 12px 14px 12px 40px; background: white; border: 1.5px solid rgba(26,71,49,0.13); border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 0.88rem; color: var(--text); outline: none; transition: border-color 0.2s; }
+    .url-input:focus   { border-color: var(--sage); }
     .url-input.valid   { border-color: #22c55e; }
     .url-input.invalid { border-color: #ef4444; }
     .input-feedback { font-size: 0.75rem; margin-top: 5px; min-height: 16px; }
     .input-feedback.ok  { color: var(--green); }
     .input-feedback.err { color: #dc2626; }
-    .update-btn { width: 100%; padding: 13px; background: var(--maroon); color: var(--yellow); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.94rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 16px; transition: background 0.2s, transform 0.2s; }
+    .update-btn { width: 100%; padding: 13px; background: var(--forest); color: var(--mint); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.94rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 16px; transition: background 0.2s, transform 0.2s; }
     .update-btn:hover    { background: var(--dark); transform: translateY(-1px); }
     .update-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
-    /* Stops tab */
     .stops-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
     .stop-row { display: flex; align-items: center; gap: 10px; background: var(--light); border-radius: 9px; padding: 10px 14px; }
-    .stop-num { width: 24px; height: 24px; background: var(--maroon); color: var(--yellow); border-radius: 6px; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .stop-num { width: 24px; height: 24px; background: var(--forest); color: var(--mint); border-radius: 6px; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .stop-input { flex: 1; background: transparent; border: none; outline: none; font-family: 'Poppins', sans-serif; font-size: 0.87rem; color: var(--text); }
-    .stop-input::placeholder { color: #BFA0A8; }
-    .stop-delete { background: none; border: none; cursor: pointer; font-size: 14px; color: #BFA0A8; padding: 2px 5px; transition: color 0.2s; }
+    .stop-input::placeholder { color: #A0C4B0; }
+    .stop-delete { background: none; border: none; cursor: pointer; font-size: 14px; color: #A0C4B0; padding: 2px 5px; transition: color 0.2s; }
     .stop-delete:hover { color: #ef4444; }
-    .add-stop-btn { width: 100%; padding: 10px 16px; background: rgba(201,146,10,0.08); border: 1.5px dashed rgba(201,146,10,0.35); border-radius: 9px; color: var(--gold); font-family: 'Poppins', sans-serif; font-size: 0.84rem; font-weight: 600; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
-    .add-stop-btn:hover { background: rgba(201,146,10,0.14); border-color: var(--gold); }
-    .save-stops-btn { width: 100%; padding: 13px; background: var(--gold); color: var(--dark); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.93rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 12px; transition: background 0.2s, transform 0.2s; }
-    .save-stops-btn:hover { background: var(--yellow); transform: translateY(-1px); }
-
+    .add-stop-btn { width: 100%; padding: 10px 16px; background: rgba(29,122,69,0.07); border: 1.5px dashed rgba(29,122,69,0.35); border-radius: 9px; color: var(--sage); font-family: 'Poppins', sans-serif; font-size: 0.84rem; font-weight: 600; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+    .add-stop-btn:hover { background: rgba(29,122,69,0.13); border-color: var(--sage); }
+    .save-stops-btn { width: 100%; padding: 13px; background: var(--sage); color: white; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.93rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 12px; transition: background 0.2s, transform 0.2s; }
+    .save-stops-btn:hover { background: var(--forest); transform: translateY(-1px); }
     .success-bar { display: none; align-items: center; gap: 10px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: var(--green); padding: 12px 16px; border-radius: 9px; font-size: 0.85rem; font-weight: 500; margin-top: 12px; }
     .success-bar.show { display: flex; }
-
-    @media (max-width: 600px) {
-      header { padding: 0 14px; }
-      .page-label { display: none; }
-      main { padding: 28px 14px; }
-      .stats-row { grid-template-columns: 1fr; }
-      .steps-row { grid-template-columns: 1fr; }
-    }
+    .undo-bar { background: var(--light); border: 1px solid var(--border); border-radius: 9px; padding: 10px 14px; font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; justify-content: space-between; margin-top: 8px; display: none; }
+    .undo-bar.show { display: flex; }
+    .undo-btn { background: var(--forest); color: var(--mint); border: none; padding: 5px 14px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; cursor: pointer; }
+    @media (max-width: 600px) { header { padding: 0 14px; } .page-label { display: none; } main { padding: 28px 14px; } .stats-row { grid-template-columns: 1fr; } .steps-row { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
-
 <header>
   <div class="header-left">
     <div class="logo-icon">🚌</div>
@@ -121,94 +104,59 @@
   <div class="header-right">
     <div class="user-chip">
       <div class="user-avatar" id="userAvatar">?</div>
-      <div>
-        <div class="user-name" id="userName">Loading...</div>
-        <div class="user-role" id="userRole">—</div>
-      </div>
+      <div><div class="user-name" id="userName">Loading...</div><div class="user-role" id="userRole">—</div></div>
     </div>
     <button class="logout-btn" onclick="logout()">🚪 Logout</button>
   </div>
 </header>
-
 <main>
   <div class="page-tag">Dashboard</div>
   <div class="page-title" id="pageTitle">Bus Dashboard</div>
   <p class="page-subtitle">Update your bus's live location and stop list so students can track in real time.</p>
-
   <div class="stats-row">
-    <div class="stat-box">
-      <span class="stat-icon">🚌</span>
-      <div class="stat-label">Assigned Bus</div>
-      <div class="stat-value" id="statBus">—</div>
-    </div>
-    <div class="stat-box">
-      <span class="stat-icon">✅</span>
-      <div class="stat-label">Updates Today</div>
-      <div class="stat-value" id="statCount">0</div>
-    </div>
+    <div class="stat-box"><span class="stat-icon">🚌</span><div class="stat-label">Assigned Bus</div><div class="stat-value" id="statBus">—</div></div>
+    <div class="stat-box"><span class="stat-icon">✅</span><div class="stat-label">Updates Today</div><div class="stat-value" id="statCount">0</div></div>
+    <div class="stat-box"><span class="stat-icon">📦</span><div class="stat-label">Undo Stack Size</div><div class="stat-value" id="statStack">0</div></div>
   </div>
-
   <div class="card">
     <div class="card-header">
       <div class="card-title">Current Live Location</div>
-      <div class="status-pill not-set" id="statusPill">
-        <span class="dot"></span> Not Set
-      </div>
+      <div class="status-pill not-set" id="statusPill"><span class="dot"></span> Not Set</div>
     </div>
-    <div class="link-display" id="linkDisplay">
-      <span>No location set yet. Update below to go live.</span>
-    </div>
+    <div class="link-display" id="linkDisplay"><span>No location set yet. Update below to go live.</span></div>
   </div>
-
   <div class="card">
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('location', this)">📍 Update Location</button>
       <button class="tab-btn"        onclick="switchTab('stops',    this)">🗺 Manage Stops</button>
     </div>
-
-    <!-- TAB 1: Update Location -->
     <div class="tab-panel active" id="tab-location">
       <div class="steps-row">
-        <div class="step-box">
-          <div class="step-num">1</div>
-          <div class="step-text"><strong>Open Google Maps</strong> on your phone</div>
-        </div>
-        <div class="step-box">
-          <div class="step-num">2</div>
-          <div class="step-text"><strong>Share your location</strong> and copy the link</div>
-        </div>
-        <div class="step-box">
-          <div class="step-num">3</div>
-          <div class="step-text"><strong>Paste below</strong> and click Update</div>
-        </div>
+        <div class="step-box"><div class="step-num">1</div><div class="step-text"><strong>Open Google Maps</strong> on your phone</div></div>
+        <div class="step-box"><div class="step-num">2</div><div class="step-text"><strong>Share your location</strong> and copy the link</div></div>
+        <div class="step-box"><div class="step-num">3</div><div class="step-text"><strong>Paste below</strong> and click Update</div></div>
       </div>
-
       <label class="field-label" for="locationLink">Google Maps Live Location Link</label>
       <div class="input-wrap">
         <span class="input-icon">🔗</span>
         <input type="url" id="locationLink" class="url-input" placeholder="https://maps.app.goo.gl/..." oninput="validateLink()" />
       </div>
       <div class="input-feedback" id="linkFeedback"></div>
-
-      <button class="update-btn" id="updateBtn" onclick="updateLocation()" disabled>
-        📡 Update Live Location
-      </button>
-      <div class="success-bar" id="locationSuccess">
-        ✅ Location updated! Students can now see your bus live.
-      </div>
+      <button class="update-btn" id="updateBtn" onclick="updateLocation()" disabled>📡 Update Live Location</button>
+      <div class="success-bar" id="locationSuccess">✅ Location updated! Students can now see your bus live.</div>
     </div>
-
-    <!-- TAB 2: Manage Stops -->
     <div class="tab-panel" id="tab-stops">
       <p style="font-size:0.83rem; color:var(--muted); margin-bottom:16px;">
-        Edit the stops that students see when they click your route. Click ✕ to remove a stop. Drag to reorder.
+        Edit the stops that students see when they click your route. Click ✕ to remove a stop.
       </p>
       <div class="stops-list" id="stopsList"></div>
       <button class="add-stop-btn" onclick="addStop()">＋ Add Stop</button>
       <button class="save-stops-btn" onclick="saveStops()">💾 Save Stop List</button>
-      <div class="success-bar" id="stopsSuccess">
-        ✅ Stop list saved! Students will see the updated stops.
+      <div class="undo-bar" id="undoBar">
+        <span>↩ Previous stop list saved in undo stack</span>
+        <button class="undo-btn" onclick="undoStops()">Undo</button>
       </div>
+      <div class="success-bar" id="stopsSuccess">✅ Stop list saved!</div>
     </div>
   </div>
 </main>
@@ -239,46 +187,168 @@
   document.getElementById("pageTitle").textContent  = "Bus " + busNum + " — Dashboard";
   document.getElementById("statBus").textContent    = "Bus " + busNum;
 
-  // Default stops per bus (matching index.html)
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC 3 — STACK (LIFO)
+  // Every time the incharge saves a stop list, the OLD list is
+  // pushed onto an undo stack. Clicking "Undo" pops it back.
+  // ═══════════════════════════════════════════════════════════
+  class UndoStack {
+    constructor() { this.items = []; }
+    push(state) { this.items.push(state); this.updateUI(); } // LIFO push
+    pop()       { const s = this.items.pop(); this.updateUI(); return s; } // LIFO pop
+    peek()      { return this.items[this.items.length - 1]; }
+    isEmpty()   { return this.items.length === 0; }
+    updateUI()  { document.getElementById("statStack").textContent = this.items.length; }
+  }
+  const undoStack = new UndoStack();
+
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC 2 — DOUBLY LINKED LIST
+  // Stops are stored as a Doubly Linked List internally.
+  // This lets us traverse forward/backward and insert/delete.
+  // ═══════════════════════════════════════════════════════════
+  class StopNode {
+    constructor(name) { this.data = name; this.next = null; this.prev = null; }
+  }
+  class StopDLL {
+    constructor() { this.head = null; this.tail = null; this.size = 0; }
+    append(name) {
+      const node = new StopNode(name);
+      if (!this.head) { this.head = node; this.tail = node; }
+      else { node.prev = this.tail; this.tail.next = node; this.tail = node; }
+      this.size++;
+    }
+    // Insert a new stop after a given index
+    insertAfterIndex(idx, name) {
+      let curr = this.head, i = 0;
+      while (curr && i < idx) { curr = curr.next; i++; }
+      if (!curr) { this.append(name); return; }
+      const node = new StopNode(name);
+      node.next = curr.next;
+      node.prev = curr;
+      if (curr.next) curr.next.prev = node;
+      else this.tail = node;
+      curr.next = node;
+      this.size++;
+    }
+    // Remove stop at index
+    removeAtIndex(idx) {
+      let curr = this.head, i = 0;
+      while (curr && i < idx) { curr = curr.next; i++; }
+      if (!curr) return;
+      if (curr.prev) curr.prev.next = curr.next;
+      else this.head = curr.next;
+      if (curr.next) curr.next.prev = curr.prev;
+      else this.tail = curr.prev;
+      this.size--;
+    }
+    toArray() {
+      const arr = []; let curr = this.head;
+      while (curr) { arr.push(curr.data); curr = curr.next; }
+      return arr;
+    }
+    fromArray(arr) {
+      this.head = null; this.tail = null; this.size = 0;
+      arr.forEach(s => this.append(s));
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC 1 — BUBBLE SORT
+  // When saving stops, they are bubble-sorted alphabetically
+  // EXCEPT for "KLH Campus" which is always kept last.
+  // ═══════════════════════════════════════════════════════════
+  function bubbleSortStops(arr) {
+    const last = arr[arr.length - 1];          // keep KLH Campus at end
+    const mid  = arr.slice(0, arr.length - 1); // sort everything else
+    const a = [...mid];
+    for (let i = 0; i < a.length - 1; i++) {
+      for (let j = 0; j < a.length - i - 1; j++) {
+        if (a[j].localeCompare(a[j+1]) > 0) [a[j], a[j+1]] = [a[j+1], a[j]];
+      }
+    }
+    return [...a, last]; // destination always last
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC 4 — DIVISION METHOD (Hash Function)
+  // TOPIC 5 — LINEAR PROBING (Collision Resolution)
+  // Location update history is stored in a hash table
+  // keyed by update count. Used for quick lookup of past URLs.
+  // ═══════════════════════════════════════════════════════════
+  const HT_SIZE = 17; // prime size
+  const locationHistoryTable = new Array(HT_SIZE).fill(null);
+
+  function hashUpdate(updateId) {
+    return updateId % HT_SIZE; // Division Method: h(k) = k mod m
+  }
+
+  function htInsert(updateId, url) {
+    let i = 0;
+    while (i < HT_SIZE) {
+      const slot = (hashUpdate(updateId) + i) % HT_SIZE; // Linear Probing
+      if (locationHistoryTable[slot] === null) {
+        locationHistoryTable[slot] = { key: updateId, url };
+        return;
+      }
+      i++; // probe next slot if collision
+    }
+  }
+
+  function htSearch(updateId) {
+    let i = 0;
+    while (i < HT_SIZE) {
+      const slot = (hashUpdate(updateId) + i) % HT_SIZE;
+      if (!locationHistoryTable[slot]) return null;
+      if (locationHistoryTable[slot].key === updateId) return locationHistoryTable[slot].url;
+      i++;
+    }
+    return null;
+  }
+
+  // ─── Default stops ────────────────────────────────────────
   const allDefaultStops = [
-    ["LB Nagar", "Vanasthalipuram", "Nagole", "Uppal", "KLH Campus"],
-    ["Kukatpally", "KPHB", "Miyapur", "Kondapur", "KLH Campus"],
-    ["Secunderabad", "Paradise", "Begumpet", "Ameerpet", "KLH Campus"],
-    ["Dilsukhnagar", "Kothapet", "Malakpet", "Mehdipatnam", "KLH Campus"],
-    ["Madhapur", "Hitech City", "Kondapur", "Gachibowli", "KLH Campus"],
-    ["Bowenpally", "Malkajgiri", "Trimulgherry", "SR Nagar", "KLH Campus"],
-    ["Tolichowki", "Masab Tank", "Rethibowli", "Banjara Hills", "KLH Campus"],
-    ["Ghatkesar", "Peerzadiguda", "Uppal", "Ramanthapur", "KLH Campus"],
-    ["Patancheru", "Balanagar", "Moosapet", "Bhel", "KLH Campus"],
-    ["Kompally", "Medchal", "Quthbullapur", "Nizampet", "KLH Campus"],
-    ["Vanasthalipuram", "Hayathnagar", "Saroornagar", "KLH Campus"],
-    ["Chandanagar", "Lingampally", "Miyapur", "Nizampet", "KLH Campus"],
-    ["Alwal", "Bolarum", "Malkajgiri", "Tarnaka", "KLH Campus"],
-    ["Suchitra", "Kompally", "Jeedimetla", "Balanagar", "KLH Campus"],
-    ["Hayathnagar", "Saroornagar", "LB Nagar", "Uppal", "KLH Campus"],
-    ["Mehdipatnam", "Tolichowki", "Nanalnagar", "Masab Tank", "KLH Campus"],
-    ["Moula Ali", "Nacharam", "Uppal", "Ramanthapur", "KLH Campus"],
-    ["Attapur", "Rajendranagar", "Mehdipatnam", "Tolichowki", "KLH Campus"],
-    ["Bahadurpura", "Chandrayangutta", "Falaknuma", "Saidabad", "KLH Campus"],
-    ["Charminar", "Abids", "Nampally", "Ameerpet", "KLH Campus"],
-    ["Ramanthapur", "Nacharam", "Uppal", "Malkajgiri", "KLH Campus"],
-    ["Nacharam", "Habsiguda", "Tarnaka", "Necklace Road", "KLH Campus"],
-    ["Tarnaka", "Mettuguda", "Secunderabad", "Begumpet", "KLH Campus"],
-    ["Himayatnagar", "Narayanguda", "Chaderghat", "Abids", "KLH Campus"],
-    ["Malakpet", "Kothapet", "Dilsukhnagar", "LB Nagar", "KLH Campus"],
-    ["Santoshnagar", "Saroornagar", "Champapet", "LB Nagar", "KLH Campus"],
-    ["Musheerabad", "RTC X Roads", "SR Nagar", "Ameerpet", "KLH Campus"],
+    ["LB Nagar","Vanasthalipuram","Nagole","Uppal","KLH Campus"],
+    ["Kukatpally","KPHB","Miyapur","Kondapur","KLH Campus"],
+    ["Secunderabad","Paradise","Begumpet","Ameerpet","KLH Campus"],
+    ["Dilsukhnagar","Kothapet","Malakpet","Mehdipatnam","KLH Campus"],
+    ["Madhapur","Hitech City","Kondapur","Gachibowli","KLH Campus"],
+    ["Bowenpally","Malkajgiri","Trimulgherry","SR Nagar","KLH Campus"],
+    ["Tolichowki","Masab Tank","Rethibowli","Banjara Hills","KLH Campus"],
+    ["Ghatkesar","Peerzadiguda","Uppal","Ramanthapur","KLH Campus"],
+    ["Patancheru","Balanagar","Moosapet","Bhel","KLH Campus"],
+    ["Kompally","Medchal","Quthbullapur","Nizampet","KLH Campus"],
+    ["Vanasthalipuram","Hayathnagar","Saroornagar","KLH Campus"],
+    ["Chandanagar","Lingampally","Miyapur","Nizampet","KLH Campus"],
+    ["Alwal","Bolarum","Malkajgiri","Tarnaka","KLH Campus"],
+    ["Suchitra","Kompally","Jeedimetla","Balanagar","KLH Campus"],
+    ["Hayathnagar","Saroornagar","LB Nagar","Uppal","KLH Campus"],
+    ["Mehdipatnam","Tolichowki","Nanalnagar","Masab Tank","KLH Campus"],
+    ["Moula Ali","Nacharam","Uppal","Ramanthapur","KLH Campus"],
+    ["Attapur","Rajendranagar","Mehdipatnam","Tolichowki","KLH Campus"],
+    ["Bahadurpura","Chandrayangutta","Falaknuma","Saidabad","KLH Campus"],
+    ["Charminar","Abids","Nampally","Ameerpet","KLH Campus"],
+    ["Ramanthapur","Nacharam","Uppal","Malkajgiri","KLH Campus"],
+    ["Nacharam","Habsiguda","Tarnaka","Necklace Road","KLH Campus"],
+    ["Tarnaka","Mettuguda","Secunderabad","Begumpet","KLH Campus"],
+    ["Himayatnagar","Narayanguda","Chaderghat","Abids","KLH Campus"],
+    ["Malakpet","Kothapet","Dilsukhnagar","LB Nagar","KLH Campus"],
+    ["Santoshnagar","Saroornagar","Champapet","LB Nagar","KLH Campus"],
+    ["Musheerabad","RTC X Roads","SR Nagar","Ameerpet","KLH Campus"],
   ];
-  const myDefaultStops = allDefaultStops[parseInt(busNum) - 1] || ["Origin Stop", "Stop 2", "KLH Campus"];
+  const myDefaultStops = allDefaultStops[parseInt(busNum) - 1] || ["Origin Stop","Stop 2","KLH Campus"];
+
+  // Internal DLL storing current stop list
+  const stopsDLL = new StopDLL();
 
   async function loadCurrentLocation() {
     try {
       const snapshot = await get(ref(db, "buses/" + user.bus));
       if (snapshot.exists()) {
         const link = snapshot.val();
-        document.getElementById("linkDisplay").innerHTML = `
-          <a href="${link}" target="_blank">${link}</a>
-          <button class="open-btn" onclick="window.open('${link}', '_blank')">Open ↗</button>`;
+        document.getElementById("linkDisplay").innerHTML =
+          `<a href="${link}" target="_blank">${link}</a>
+           <button class="open-btn" onclick="window.open('${link}','_blank')">Open ↗</button>`;
         document.getElementById("statusPill").className = "status-pill active";
         document.getElementById("statusPill").innerHTML = `<span class="dot"></span> Active`;
       }
@@ -289,8 +359,13 @@
   async function loadStops() {
     try {
       const snapshot = await get(ref(db, "stops/" + user.bus));
-      renderStops(snapshot.exists() ? snapshot.val() : myDefaultStops);
-    } catch (e) { renderStops(myDefaultStops); }
+      const arr = snapshot.exists() ? snapshot.val() : myDefaultStops;
+      stopsDLL.fromArray(arr);      // load into Doubly Linked List
+      renderStops(stopsDLL.toArray()); // display from DLL traversal
+    } catch (e) {
+      stopsDLL.fromArray(myDefaultStops);
+      renderStops(stopsDLL.toArray());
+    }
   }
   loadStops();
 
@@ -329,12 +404,33 @@
 
   window.saveStops = async function () {
     const inputs = document.querySelectorAll("#stopsList .stop-input");
-    const stops  = Array.from(inputs).map(i => i.value.trim()).filter(Boolean);
+    let stops    = Array.from(inputs).map(i => i.value.trim()).filter(Boolean);
     if (stops.length < 2) { alert("Please add at least 2 stops."); return; }
+
+    // TOPIC 3: STACK — push current stop list onto undo stack before saving
+    undoStack.push([...stopsDLL.toArray()]); // save old state
+    document.getElementById("undoBar").classList.add("show");
+
+    // TOPIC 1: BUBBLE SORT — sort stops alphabetically (keeps destination last)
+    stops = bubbleSortStops(stops);
+
+    // Update the DLL with sorted stops
+    stopsDLL.fromArray(stops);
+    renderStops(stopsDLL.toArray()); // re-render sorted list
+
     try {
       await set(ref(db, "stops/" + user.bus), stops);
       showSuccess("stopsSuccess");
     } catch (e) { alert("Failed to save stops. Check your connection."); }
+  };
+
+  // TOPIC 3: STACK — pop previous state and restore (Undo)
+  window.undoStops = function () {
+    if (undoStack.isEmpty()) return;
+    const prev = undoStack.pop(); // LIFO pop
+    stopsDLL.fromArray(prev);
+    renderStops(stopsDLL.toArray());
+    if (undoStack.isEmpty()) document.getElementById("undoBar").classList.remove("show");
   };
 
   window.validateLink = function () {
@@ -342,19 +438,12 @@
     const input    = document.getElementById("locationLink");
     const feedback = document.getElementById("linkFeedback");
     const btn      = document.getElementById("updateBtn");
-
-    if (!value) { input.className = "url-input"; feedback.textContent = ""; btn.disabled = true; return; }
-
-    const isGoogleMaps = value.includes("maps.app.goo.gl") || value.includes("google.com/maps") || value.includes("goo.gl");
+    if (!value) { input.className="url-input"; feedback.textContent=""; btn.disabled=true; return; }
+    const isGM  = value.includes("maps.app.goo.gl") || value.includes("google.com/maps") || value.includes("goo.gl");
     const isUrl = value.startsWith("http");
-
-    if (isGoogleMaps) {
-      input.className = "url-input valid"; feedback.textContent = "✅ Valid Google Maps link"; feedback.className = "input-feedback ok"; btn.disabled = false;
-    } else if (isUrl) {
-      input.className = "url-input valid"; feedback.textContent = "⚠️ Looks like a URL — confirm it's from Google Maps"; feedback.className = "input-feedback ok"; btn.disabled = false;
-    } else {
-      input.className = "url-input invalid"; feedback.textContent = "❌ Please paste a valid Google Maps link"; feedback.className = "input-feedback err"; btn.disabled = true;
-    }
+    if (isGM) { input.className="url-input valid"; feedback.textContent="✅ Valid Google Maps link"; feedback.className="input-feedback ok"; btn.disabled=false; }
+    else if (isUrl) { input.className="url-input valid"; feedback.textContent="⚠️ Confirm this is from Google Maps"; feedback.className="input-feedback ok"; btn.disabled=false; }
+    else { input.className="url-input invalid"; feedback.textContent="❌ Please paste a valid Google Maps link"; feedback.className="input-feedback err"; btn.disabled=true; }
   };
 
   let updateCount = 0;
@@ -364,14 +453,19 @@
     if (!link) return;
     const btn = document.getElementById("updateBtn");
     btn.disabled = true; btn.textContent = "⏳ Updating...";
-
     try {
       await set(ref(db, "buses/" + user.bus), link);
       updateCount++;
+
+      // TOPIC 4+5: Hash table insert — store update in location history
+      // Division Method + Linear Probing
+      htInsert(updateCount, link);
+      console.log("Update #" + updateCount + " stored at hash slot:", hashUpdate(updateCount));
+
       document.getElementById("statCount").textContent = updateCount;
-      document.getElementById("linkDisplay").innerHTML = `
-        <a href="${link}" target="_blank">${link}</a>
-        <button class="open-btn" onclick="window.open('${link}', '_blank')">Open ↗</button>`;
+      document.getElementById("linkDisplay").innerHTML =
+        `<a href="${link}" target="_blank">${link}</a>
+         <button class="open-btn" onclick="window.open('${link}','_blank')">Open ↗</button>`;
       document.getElementById("statusPill").className = "status-pill active";
       document.getElementById("statusPill").innerHTML = `<span class="dot"></span> Active`;
       showSuccess("locationSuccess");
@@ -379,7 +473,6 @@
       document.getElementById("linkFeedback").textContent = "";
       document.getElementById("locationLink").className = "url-input";
     } catch (e) { alert("Failed to update. Please check your internet connection."); }
-
     btn.disabled = false; btn.innerHTML = "📡 Update Live Location";
   };
 
@@ -390,8 +483,8 @@
     clickedBtn.classList.add("active");
   };
 
-  function showSuccess(elementId) {
-    const bar = document.getElementById(elementId);
+  function showSuccess(id) {
+    const bar = document.getElementById(id);
     bar.classList.add("show");
     setTimeout(() => bar.classList.remove("show"), 4000);
   }
@@ -403,5 +496,6 @@
 </script>
 </body>
 </html>
+
 
 
