@@ -1,130 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!--co1 topic struuheuhushucture -->
 <head>
   <meta charset="UTF-8" />
   <title>KLH Transport Tracker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!--co1 using css and styling the page-->
   <style>
     :root {
-      --maroon : #7B1022; --dark   : #4E0A16; --gold   : #C9920A;
-      --yellow : #E8B020; --cream  : #FDF8EE; --light  : #F2E8D0;
-      --text   : #1A0509; --muted  : #7A4050; --border : rgba(201,146,10,0.25);
+      --forest : #1A4731; --dark   : #0C2B1C; --sage   : #2D8653;
+      --mint   : #86EFAC; --cream  : #EDFAF3; --light  : #D9F2E6;
+      --text   : #0C2B1C; --muted  : #4A7A5E; --border : rgba(29,122,69,0.2);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Poppins', sans-serif; background: var(--cream); color: var(--text); }
-
-    header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: 65px; background: var(--dark); border-bottom: 2px solid var(--gold);
-      display: flex; align-items: center; justify-content: space-between; padding: 0 40px;
-    }
+    body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+      background-image:radial-gradient(circle,rgba(29,122,69,0.16) 1.2px,transparent 1.2px);
+      background-size:28px 28px; }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 65px; background: var(--dark); border-bottom: 2px solid var(--sage);
+      display: flex; align-items: center; justify-content: space-between; padding: 0 40px; }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-    .logo-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--yellow); }
-    .logo-tagline { display: block; font-size: 0.6rem; color: rgba(232,176,32,0.6); letter-spacing: 2px; text-transform: uppercase; }
+    .logo-icon { width: 36px; height: 36px; background: var(--sage); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .logo-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--mint); }
+    .logo-tagline { display: block; font-size: 0.6rem; color: rgba(134,239,172,0.6); letter-spacing: 2px; text-transform: uppercase; }
     nav { display: flex; align-items: center; gap: 6px; }
     nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; padding: 7px 14px; border-radius: 6px; transition: background 0.2s, color 0.2s; }
-    nav a:hover { background: rgba(201,146,10,0.15); color: var(--yellow); }
-    nav .login-btn { background: var(--gold); color: var(--dark); font-weight: 600; }
-    nav .login-btn:hover { background: var(--yellow); }
-
-    .hero { min-height: 100vh; padding: 100px 20px 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: linear-gradient(160deg, rgba(78,10,22,0.06) 0%, transparent 50%); }
-    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(201,146,10,0.12); border: 1px solid rgba(201,146,10,0.4); color: var(--gold); font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 50px; margin-bottom: 24px; }
-    .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--yellow); display: inline-block; animation: pulse 2s infinite; }
+    nav a:hover { background: rgba(45,134,83,0.2); color: var(--mint); }
+    nav .login-btn { background: var(--sage); color: white; font-weight: 600; }
+    nav .login-btn:hover { background: var(--forest); }
+    .hero { min-height: 100vh; padding: 100px 20px 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: linear-gradient(160deg, rgba(26,71,49,0.06) 0%, transparent 50%); position:relative; z-index:1; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(29,122,69,0.1); border: 1px solid rgba(29,122,69,0.35); color: var(--sage); font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 50px; margin-bottom: 24px; }
+    .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sage); display: inline-block; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
     .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5.5vw, 4.8rem); line-height: 1.1; color: var(--dark); max-width: 750px; }
-    .hero h1 span { color: var(--gold); font-style: italic; }
+    .hero h1 span { color: var(--forest); font-style: italic; }
     .hero-buttons { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; justify-content: center; }
-    .btn-primary { background: var(--maroon); color: var(--yellow); padding: 12px 26px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+    .btn-primary { background: var(--forest); color: var(--mint); padding: 12px 26px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.2s; box-shadow: 0 4px 14px rgba(26,71,49,0.25); }
     .btn-primary:hover { background: var(--dark); transform: translateY(-2px); }
-    .btn-outline { background: transparent; color: var(--maroon); padding: 12px 26px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; border: 2px solid var(--border); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
-    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-
-    .section { padding: 80px 40px; max-width: 1100px; margin: 0 auto; }
-    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .btn-outline { background: transparent; color: var(--forest); padding: 12px 26px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; border: 2px solid rgba(29,122,69,0.3); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+    .btn-outline:hover { border-color: var(--sage); color: var(--sage); }
+    .section { padding: 80px 40px; max-width: 1100px; margin: 0 auto; position:relative; z-index:1; }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 8px; }
     .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--dark); margin-bottom: 8px; }
     .section-desc { font-size: 0.93rem; color: var(--muted); max-width: 480px; line-height: 1.7; margin-bottom: 40px; }
-
-    .card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 26px; box-shadow: 0 4px 20px rgba(123,16,34,0.07); }
-    .card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--maroon); margin-bottom: 4px; }
+    .card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 26px; box-shadow: 0 4px 20px rgba(26,71,49,0.07); }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--forest); margin-bottom: 4px; }
     .card-subtitle { font-size: 0.8rem; color: var(--muted); margin-bottom: 18px; }
-
     .search-box { position: relative; margin-bottom: 12px; }
     .search-box input { width: 100%; padding: 10px 14px 10px 38px; background: var(--cream); border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.85rem; color: var(--text); outline: none; transition: border-color 0.2s; }
-    .search-box input:focus { border-color: var(--gold); }
+    .search-box input:focus { border-color: var(--sage); }
     .search-box .icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); }
     .bus-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; max-height: 250px; overflow-y: auto; margin-bottom: 16px; }
     .bus-btn { padding: 8px 4px; border: 1.5px solid var(--border); border-radius: 8px; background: var(--cream); font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 600; color: var(--muted); cursor: pointer; text-align: center; transition: border-color 0.15s, color 0.15s, background 0.15s; }
-    .bus-btn:hover { border-color: var(--gold); color: var(--gold); }
-    .bus-btn.active { background: var(--maroon); border-color: var(--maroon); color: var(--yellow); }
-    .selected-bus { background: var(--maroon); border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; min-height: 54px; }
+    .bus-btn:hover { border-color: var(--sage); color: var(--sage); background: rgba(29,122,69,0.05); }
+    .bus-btn.active { background: var(--forest); border-color: var(--forest); color: var(--mint); }
+    .selected-bus { background: var(--forest); border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; min-height: 54px; }
     .selected-bus.empty { background: var(--light); border: 1.5px dashed var(--border); }
-    .selected-bus .bus-label { font-size: 0.7rem; color: rgba(232,176,32,0.7); text-transform: uppercase; letter-spacing: 1px; }
-    .selected-bus .bus-value { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--yellow); }
+    .selected-bus .bus-label { font-size: 0.7rem; color: rgba(134,239,172,0.7); text-transform: uppercase; letter-spacing: 1px; }
+    .selected-bus .bus-value { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--mint); }
     .selected-bus .empty-text { font-size: 0.85rem; color: var(--muted); }
-    .track-btn { width: 100%; padding: 12px; background: var(--gold); color: var(--dark); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.93rem; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s, transform 0.2s; }
-    .track-btn:hover { background: var(--yellow); transform: translateY(-1px); }
+    .track-btn { width: 100%; padding: 12px; background: var(--sage); color: white; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.93rem; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s, transform 0.2s; box-shadow: 0 4px 14px rgba(29,122,69,0.28); }
+    .track-btn:hover { background: var(--forest); transform: translateY(-1px); }
     .track-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
     .routes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; }
-    .route-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; cursor: pointer; position: relative; overflow: hidden; box-shadow: 0 3px 14px rgba(123,16,34,0.05); transition: transform 0.2s, box-shadow 0.2s; }
-    .route-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(123,16,34,0.12); }
-    .route-card::before { content:''; position: absolute; top:0; left:0; width:3px; height:100%; background: linear-gradient(to bottom, var(--gold), var(--maroon)); }
-    .route-card .bus-number { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--maroon); margin-bottom: 2px; }
+    .route-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; cursor: pointer; position: relative; overflow: hidden; box-shadow: 0 3px 14px rgba(26,71,49,0.05); transition: transform 0.2s, box-shadow 0.2s; }
+    .route-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(26,71,49,0.12); }
+    .route-card::before { content:''; position: absolute; top:0; left:0; width:3px; height:100%; background: linear-gradient(to bottom, var(--sage), var(--forest)); }
+    .route-card .bus-number { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--forest); margin-bottom: 2px; }
     .route-card .route-name { font-size: 0.86rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
     .route-card .stops-preview { font-size: 0.76rem; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
-    .route-card .tag { display: inline-block; background: rgba(201,146,10,0.1); color: var(--gold); font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; }
-    .view-stops-btn { margin-left: 8px; font-family: 'Poppins', sans-serif; font-size: 0.73rem; font-weight: 600; color: var(--maroon); background: none; border: 1px solid var(--border); padding: 3px 10px; border-radius: 50px; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
-    .view-stops-btn:hover { background: var(--maroon); color: white; border-color: var(--maroon); }
-
-    /* Modal */
-    .modal-bg { position: fixed; inset: 0; z-index: 400; background: rgba(78,10,22,0.6); display: none; align-items: center; justify-content: center; padding: 20px; }
+    .route-card .tag { display: inline-block; background: rgba(29,122,69,0.1); color: var(--sage); font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; }
+    .view-stops-btn { margin-left: 8px; font-family: 'Poppins', sans-serif; font-size: 0.73rem; font-weight: 600; color: var(--forest); background: none; border: 1px solid var(--border); padding: 3px 10px; border-radius: 50px; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    .view-stops-btn:hover { background: var(--forest); color: white; border-color: var(--forest); }
+    .modal-bg { position: fixed; inset: 0; z-index: 400; background: rgba(12,43,28,0.6); display: none; align-items: center; justify-content: center; padding: 20px; }
     .modal-bg.open { display: flex; }
-    .modal-box { background: var(--cream); border-radius: 18px; padding: 32px; width: 100%; max-width: 440px; max-height: 88vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.25); animation: slideUp 0.3s ease; }
+    .modal-box { background: var(--cream); border-radius: 18px; padding: 32px; width: 100%; max-width: 440px; max-height: 88vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(12,43,28,0.25); animation: slideUp 0.3s ease; }
     @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-    .modal-close { position: absolute; top: 14px; right: 14px; background: rgba(123,16,34,0.08); border: none; width: 30px; height: 30px; border-radius: 7px; font-size: 13px; cursor: pointer; color: var(--maroon); display: flex; align-items: center; justify-content: center; transition: background 0.2s, color 0.2s; }
-    .modal-close:hover { background: var(--maroon); color: white; }
-    .modal-bus-tag { font-size: 0.78rem; color: var(--gold); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2px; }
+    .modal-close { position: absolute; top: 14px; right: 14px; background: rgba(26,71,49,0.08); border: none; width: 30px; height: 30px; border-radius: 7px; font-size: 13px; cursor: pointer; color: var(--forest); display: flex; align-items: center; justify-content: center; transition: background 0.2s, color 0.2s; }
+    .modal-close:hover { background: var(--forest); color: white; }
+    .modal-bus-tag { font-size: 0.78rem; color: var(--sage); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2px; }
     .modal-route-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--dark); margin-bottom: 20px; }
     .stops-timeline { display: flex; flex-direction: column; }
     .stop-row { display: flex; align-items: flex-start; gap: 12px; position: relative; }
-    .stop-row:not(:last-child)::after { content:''; position: absolute; left: 10px; top: 24px; width: 2px; height: calc(100% - 4px); background: linear-gradient(to bottom, var(--gold), rgba(201,146,10,0.15)); }
+    .stop-row:not(:last-child)::after { content:''; position: absolute; left: 10px; top: 24px; width: 2px; height: calc(100% - 4px); background: linear-gradient(to bottom, var(--sage), rgba(45,134,83,0.12)); }
     .stop-dot { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; z-index: 1; }
-    .stop-dot.first { background: var(--maroon); color: var(--yellow); }
-    .stop-dot.last  { background: var(--gold); color: var(--dark); }
-    .stop-dot.mid   { background: var(--light); border: 2px solid var(--gold); color: var(--gold); }
+    .stop-dot.first { background: var(--forest); color: var(--mint); }
+    .stop-dot.last  { background: var(--sage);   color: white; }
+    .stop-dot.mid   { background: var(--light);  border: 2px solid var(--sage); color: var(--sage); }
     .stop-info { padding: 1px 0 16px; }
     .stop-name { font-size: 0.88rem; font-weight: 600; color: var(--text); }
     .stop-type { font-size: 0.7rem; color: var(--muted); margin-top: 1px; }
-    .modal-track-btn { width: 100%; margin-top: 16px; padding: 12px; background: var(--maroon); color: var(--yellow); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.9rem; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+    .modal-track-btn { width: 100%; margin-top: 16px; padding: 12px; background: var(--forest); color: var(--mint); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.9rem; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s, transform 0.2s; }
     .modal-track-btn:hover { background: var(--dark); transform: translateY(-1px); }
     .modal-loading { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 20px 0; }
-
+    .sort-bar { background: var(--light); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; margin-bottom: 14px; font-size: 0.75rem; color: var(--muted); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .sort-bar strong { color: var(--forest); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
     .contact-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
     .contact-item:last-child { border-bottom: none; }
-    .contact-icon { width: 38px; height: 38px; background: rgba(123,16,34,0.07); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .contact-icon { width: 38px; height: 38px; background: rgba(26,71,49,0.07); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
     .contact-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
     .contact-value { font-size: 0.88rem; font-weight: 600; color: var(--text); }
-    .emergency-box { background: linear-gradient(135deg, var(--dark), var(--maroon)); border-radius: 16px; padding: 28px; color: white; position: relative; overflow: hidden; }
+    .emergency-box { background: linear-gradient(135deg, var(--dark), var(--forest)); border-radius: 16px; padding: 28px; color: white; position: relative; overflow: hidden; }
     .emergency-box::after { content:'🚌'; position: absolute; right:-8px; bottom:-8px; font-size:6rem; opacity:0.07; transform:rotate(-15deg); }
-    .emergency-box h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--yellow); margin-bottom: 8px; }
+    .emergency-box h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--mint); margin-bottom: 8px; }
     .emergency-box p { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; }
-    .emergency-box .phone { display: block; font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--yellow); margin-bottom: 16px; }
-    .call-btn { display: inline-flex; align-items: center; gap: 7px; background: var(--gold); color: var(--dark); padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 0.86rem; text-decoration: none; transition: background 0.2s; }
-    .call-btn:hover { background: var(--yellow); }
-
-    footer { background: var(--dark); border-top: 2px solid rgba(201,146,10,0.2); padding: 26px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    footer .copy { font-size: 0.78rem; color: rgba(232,176,32,0.45); }
+    .emergency-box .phone { display: block; font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--mint); margin-bottom: 16px; }
+    .call-btn { display: inline-flex; align-items: center; gap: 7px; background: var(--sage); color: white; padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 0.86rem; text-decoration: none; transition: background 0.2s; }
+    .call-btn:hover { background: var(--forest); }
+    footer { background: var(--dark); border-top: 2px solid rgba(29,122,69,0.25); padding: 26px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; position:relative; z-index:1; }
+    footer .copy { font-size: 0.78rem; color: rgba(134,239,172,0.45); }
     footer .links { display: flex; gap: 18px; }
-    footer .links a { font-size: 0.78rem; color: rgba(232,176,32,0.45); text-decoration: none; transition: color 0.2s; }
-    footer .links a:hover { color: var(--yellow); }
-
-    .toast { position: fixed; bottom: 22px; right: 22px; z-index: 500; background: var(--dark); border: 1px solid rgba(201,146,10,0.4); color: var(--yellow); padding: 11px 18px; border-radius: 10px; font-size: 0.86rem; font-weight: 500; pointer-events: none; opacity: 0; transform: translateY(60px); transition: opacity 0.3s ease, transform 0.3s ease; }
+    footer .links a { font-size: 0.78rem; color: rgba(134,239,172,0.45); text-decoration: none; transition: color 0.2s; }
+    footer .links a:hover { color: var(--mint); }
+    .toast { position: fixed; bottom: 22px; right: 22px; z-index: 500; background: var(--dark); border: 1px solid rgba(29,122,69,0.4); color: var(--mint); padding: 11px 18px; border-radius: 10px; font-size: 0.86rem; font-weight: 500; pointer-events: none; opacity: 0; transform: translateY(60px); transition: opacity 0.3s ease, transform 0.3s ease; }
     .toast.show { opacity: 1; transform: translateY(0); }
-
     @media (max-width: 860px) {
       header { padding: 0 16px; }
       nav a:not(.login-btn) { display: none; }
@@ -135,7 +128,7 @@
   </style>
 </head>
 <body>
-
+<!-- CO1: Website header and navigation structure -->
 <header>
   <a href="#home" class="logo">
     <div class="logo-icon">🚌</div>
@@ -162,22 +155,24 @@
   </div>
 </section>
 
+<!-- CO2: Semantic HTML section for bus tracking -->
 <div class="section" id="track">
   <div class="section-label">Live Tracking</div>
   <div class="section-title">Track Your Bus</div>
   <p class="section-desc">Select your bus number and click "Open Live Location" to view the bus on Google Maps.</p>
-
   <div class="card" style="max-width: 480px;">
     <div class="card-title">Select a Bus</div>
     <p class="card-subtitle">27 active campus routes</p>
     <div class="search-box">
       <span class="icon">🔍</span>
+      <!-- CO2: Input form element for searching bus numbers -->
       <input type="text" id="busSearch" placeholder="Search bus number..." oninput="filterBuses()" />
     </div>
     <div class="bus-grid" id="busGrid"></div>
     <div class="selected-bus empty" id="selectedBus">
       <span class="empty-text">No bus selected</span>
     </div>
+    <!--Dom html -->
     <button class="track-btn" id="trackBtn" onclick="trackBus()" disabled>
       📍 Open Live Location
     </button>
@@ -188,9 +183,16 @@
   <div class="section-label">All Routes</div>
   <div class="section-title">Campus Bus Routes</div>
   <p class="section-desc">Click <strong>View Stops</strong> to see every stop on a route. Click the card to jump to the tracker.</p>
+  <div class="sort-bar">
+    <strong>Sort routes by:</strong>
+    <button class="view-stops-btn" onclick="sortRoutes('default')">Bus Number</button>
+    <button class="view-stops-btn" onclick="sortRoutes('name-asc')">Name A→Z</button>
+  </div>
   <div class="routes-grid" id="routesGrid"></div>
 </div>
 
+
+<!-- CO2: Contact information section using semantic layout -->
 <div class="section" id="contact">
   <div class="section-label">Get In Touch</div>
   <div class="section-title">Transport Office</div>
@@ -198,22 +200,10 @@
   <div class="contact-grid">
     <div class="card">
       <div class="card-title" style="margin-bottom: 16px;">Contact Details</div>
-      <div class="contact-item">
-        <div class="contact-icon">📧</div>
-        <div><div class="contact-label">Email</div><div class="contact-value">transport@klh.edu.in</div></div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">📞</div>
-        <div><div class="contact-label">Phone</div><div class="contact-value">+91 XXXXX XXXXX</div></div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">🕐</div>
-        <div><div class="contact-label">Office Hours</div><div class="contact-value">Mon–Sat, 7:00 AM – 6:00 PM</div></div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">🏛️</div>
-        <div><div class="contact-label">Location</div><div class="contact-value">Transport Block, KLH Campus</div></div>
-      </div>
+      <div class="contact-item"><div class="contact-icon">📧</div><div><div class="contact-label">Email</div><div class="contact-value">transport@klh.edu.in</div></div></div>
+      <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label">Phone</div><div class="contact-value">+91 XXXXX XXXXX</div></div></div>
+      <div class="contact-item"><div class="contact-icon">🕐</div><div><div class="contact-label">Office Hours</div><div class="contact-value">Mon–Sat, 7:00 AM – 6:00 PM</div></div></div>
+      <div class="contact-item"><div class="contact-icon">🏛️</div><div><div class="contact-label">Location</div><div class="contact-value">Transport Block, KLH Campus</div></div></div>
     </div>
     <div class="emergency-box">
       <h3>🚨 Bus Emergency?</h3>
@@ -226,21 +216,15 @@
 
 <footer>
   <span class="copy">© 2026 KLH University · Smart Campus Transport System</span>
-  <div class="links">
-    <a href="#">Privacy</a>
-    <a href="#">Terms</a>
-    <a href="login.html">Staff Login</a>
-  </div>
+  <div class="links"><a href="#">Privacy</a><a href="#">Terms</a><a href="login.html">Staff Login</a></div>
 </footer>
-
 <div class="toast" id="toast"></div>
-
 <div class="modal-bg" id="stopsModal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-bus-tag"    id="modalBusTag">BUS 1</div>
+    <div class="modal-bus-tag" id="modalBusTag">BUS 1</div>
     <div class="modal-route-name" id="modalRouteName">Route Name</div>
-    <div class="stops-timeline"   id="stopsList"></div>
+    <div class="stops-timeline" id="stopsList"></div>
     <button class="modal-track-btn" onclick="modalTrack()">📍 Track This Bus Live</button>
   </div>
 </div>
@@ -249,6 +233,7 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
   import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
 
+  // CO5: Firebase backend integration for real-time bus location tracking
   const firebaseConfig = {
     apiKey           : "AIzaSyDPWTpCY0kLJdPgBZBkmV32Cr53TLCFYDY",
     authDomain       : "cb-tracker-446fb.firebaseapp.com",
@@ -261,6 +246,134 @@
   const app = initializeApp(firebaseConfig);
   const db  = getDatabase(app);
 
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC 2 — DOUBLY LINKED LIST
+  // Each bus stop is a node with next and prev pointers.
+  // The bus route is represented as a doubly linked list.
+  // ═══════════════════════════════════════════════════════════
+  class StopNode {
+    constructor(name) {
+      this.data = name;  // stop name
+      this.next = null;  // pointer to next stop
+      this.prev = null;  // pointer to previous stop
+    }
+  }
+
+  class DoublyLinkedList {
+    constructor() { this.head = null; this.tail = null; this.size = 0; }
+
+    // Append a stop to the end of the route
+    append(name) {
+      const node = new StopNode(name);
+      if (!this.head) { this.head = node; this.tail = node; }
+      else { node.prev = this.tail; this.tail.next = node; this.tail = node; }
+      this.size++;
+    }
+
+    // Convert DLL back to array for display
+    toArray() {
+      const arr = [];
+      let curr = this.head;
+      while (curr) { arr.push(curr.data); curr = curr.next; }
+      return arr;
+    }
+  }
+
+  // Build each route as a Doubly Linked List
+  function buildRouteDLL(stopsArray) {
+    const dll = new DoublyLinkedList();
+    stopsArray.forEach(s => dll.append(s));
+    return dll;
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC 4 — DIVISION METHOD (Hash Function)
+  // TOPIC 5 — LINEAR PROBING (Collision Resolution)
+  // Bus numbers are hashed to look up route data quickly.
+  // h(k) = k mod TABLE_SIZE
+  // Collision resolved by linear probing: (h(k) + i) mod TABLE_SIZE
+  // ═══════════════════════════════════════════════════════════
+  const TABLE_SIZE = 31; // prime — reduces collisions
+  const hashTable  = new Array(TABLE_SIZE).fill(null);
+
+  // Division method hash function
+  function hashBus(busNumber) {
+    return busNumber % TABLE_SIZE; // h(k) = k mod m
+  }
+
+  // Insert route into hash table with linear probing
+  function hashInsert(busNumber, routeData) {
+    let slot = hashBus(busNumber);
+    let i = 0;
+    while (i < TABLE_SIZE) {
+      const probe = (slot + i) % TABLE_SIZE; // h(k,i) = (h(k)+i) mod m
+      if (hashTable[probe] === null) {
+        hashTable[probe] = { key: busNumber, value: routeData };
+        return probe;
+      }
+      i++; // linear probe: try next slot
+    }
+  }
+
+  // Search route by bus number using same probe sequence
+  function hashSearch(busNumber) {
+    let slot = hashBus(busNumber);
+    let i = 0;
+    while (i < TABLE_SIZE) {
+      const probe = (slot + i) % TABLE_SIZE;
+      if (hashTable[probe] === null) return null;         // not found
+      if (hashTable[probe].key === busNumber) return hashTable[probe].value; // found
+      i++;
+    }
+    return null;
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC 1 — BUBBLE SORT
+  // Route cards are sorted by name (A→Z) using Bubble Sort
+  // before being rendered on the page. This ensures the routes
+  // section always displays in a consistent alphabetical order
+  // without any visible sort controls.
+  // ═══════════════════════════════════════════════════════════
+  function bubbleSort(arr, compareFn) {
+    const a = [...arr];
+    const n = a.length;
+    for (let i = 0; i < n - 1; i++) {
+      for (let j = 0; j < n - i - 1; j++) {
+        if (compareFn(a[j], a[j + 1]) > 0) {
+          // swap adjacent elements
+          [a[j], a[j + 1]] = [a[j + 1], a[j]];
+        }
+      }
+    }
+    return a;
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // TOPIC 3 — QUEUE (FIFO)
+  // Tracks recent bus selections — the last 5 selected buses
+  // are remembered in order using a Queue (FIFO).
+  // ═══════════════════════════════════════════════════════════
+  class BusQueue {
+    constructor(maxSize) {
+      this.items   = [];
+      this.maxSize = maxSize;
+    }
+    enqueue(item) {                        // add to rear
+      if (this.items.length >= this.maxSize) this.dequeue(); // drop oldest if full
+      this.items.push(item);
+    }
+    dequeue() { return this.items.shift(); } // remove from front (FIFO)
+    peek()    { return this.items[0]; }
+    toArray() { return [...this.items]; }
+    isEmpty() { return this.items.length === 0; }
+  }
+
+  const recentBusQueue = new BusQueue(5); // remember last 5 selected buses
+
+  // ───────────────────────────────────────────────────────────
+  // Route data — each route stored in hash table & as DLL
+  // ───────────────────────────────────────────────────────────
   const defaultRoutes = [
     { path: "LB Nagar → KLH Campus",       stops: ["LB Nagar", "Vanasthalipuram", "Nagole", "Uppal", "KLH Campus"] },
     { path: "Kukatpally → KLH Campus",      stops: ["Kukatpally", "KPHB", "Miyapur", "Kondapur", "KLH Campus"] },
@@ -291,27 +404,42 @@
     { path: "Musheerabad → KLH Campus",     stops: ["Musheerabad", "RTC X Roads", "SR Nagar", "Ameerpet", "KLH Campus"] },
   ];
 
+  // Build hash table: insert each bus route using Division Method + Linear Probing
+  defaultRoutes.forEach((route, index) => {
+    const busNumber = index + 1;
+    hashInsert(busNumber, { ...route, busNumber });
+  });
+
   let selectedBusKey = null;
   let modalBusNumber = null;
 
+  // ─── Bus grid ───────────────────────────────────────────────
   function buildBusGrid(filter = "") {
     const grid = document.getElementById("busGrid");
     grid.innerHTML = "";
-    for (let i = 1; i <= 27; i++) {
-      if (filter && !("Bus " + i).toLowerCase().includes(filter.toLowerCase())) continue;
+    let nums = Array.from({ length: 27 }, (_, i) => i + 1);
+    nums.forEach(i => {
+      const label = "Bus " + i;
+      if (filter && !label.toLowerCase().includes(filter.toLowerCase())) return;
       const btn = document.createElement("button");
       btn.className = "bus-btn" + (selectedBusKey === "bus" + i ? " active" : "");
       btn.textContent = i;
+      // CO4: DOM event handling for button click
       btn.onclick = () => selectBus("bus" + i, i);
       grid.appendChild(btn);
-    }
+    });
   }
 
   window.filterBuses = () => buildBusGrid(document.getElementById("busSearch").value);
 
+  // CO3: Function for selecting a bus
   function selectBus(key, num) {
     selectedBusKey = key;
     buildBusGrid(document.getElementById("busSearch").value);
+
+    // TOPIC 3: QUEUE — enqueue this bus into the recent selections queue (FIFO)
+    recentBusQueue.enqueue(num);
+
     const box = document.getElementById("selectedBus");
     box.className = "selected-bus";
     box.innerHTML = `<div><div class="bus-label">Selected Route</div><div class="bus-value">Bus ${num}</div></div><span style="font-size:1.4rem;">🚌</span>`;
@@ -321,6 +449,12 @@
 
   window.trackBus = async function () {
     if (!selectedBusKey) return;
+    const num = parseInt(selectedBusKey.replace("bus", ""));
+
+    // TOPIC 4+5: Use hash table lookup (Division Method + Linear Probing) to get route
+    const route = hashSearch(num);
+    if (route) console.log("Hash lookup found:", route.path);
+
     try {
       const snapshot = await get(ref(db, "buses/" + selectedBusKey));
       if (snapshot.exists()) {
@@ -332,10 +466,12 @@
     } catch (e) { showToast("❌ Could not connect to database"); }
   };
 
-  function buildRoutes() {
+  // ─── Route cards ────────────────────────────────────────────
+  function buildRoutes(routes) {
     const grid = document.getElementById("routesGrid");
-    defaultRoutes.forEach((route, index) => {
-      const busNum  = index + 1;
+    grid.innerHTML = "";
+    routes.forEach((route) => {
+      const busNum  = route.busNumber;
       const preview = route.stops.slice(0, 3).join(" → ") + (route.stops.length > 3 ? "…" : "");
       const card = document.createElement("div");
       card.className = "route-card";
@@ -352,27 +488,38 @@
     });
   }
 
-  /* Opens modal and fetches latest stops from Firebase (falls back to defaults) */
+  // TOPIC 2+5: Modal fetches stops from Firebase, falls back to DLL traversal
   window.openModal = async function (busNum) {
     modalBusNumber = busNum;
-    const route = defaultRoutes[busNum - 1];
+
+    // TOPIC 4+5: Hash table lookup to get default route
+    const route = hashSearch(busNum);
     document.getElementById("modalBusTag").textContent    = "BUS " + busNum;
     document.getElementById("modalRouteName").textContent = route.path;
     const list = document.getElementById("stopsList");
     list.innerHTML = '<div class="modal-loading">⏳ Loading stops...</div>';
     document.getElementById("stopsModal").classList.add("open");
 
-    let stops = route.stops;
+    // Build route as Doubly Linked List for traversal
+    let stopsDLL = buildRouteDLL(route.stops);
+    let stops    = stopsDLL.toArray(); // traverse DLL head→tail
+
     try {
+      // Try Firebase first; fall back to DLL if unavailable
       const snapshot = await get(ref(db, "stops/bus" + busNum));
-      if (snapshot.exists()) stops = snapshot.val();
-    } catch (e) { /* use defaults */ }
+      if (snapshot.exists()) {
+        stops = snapshot.val();
+        // Rebuild DLL from Firebase data
+        stopsDLL = buildRouteDLL(stops);
+        stops    = stopsDLL.toArray(); // re-traverse updated DLL
+      }
+    } catch (e) { /* use DLL default */ }
 
     list.innerHTML = "";
     stops.forEach((stop, i) => {
-      const isFirst = i === 0, isLast = i === stops.length - 1;
-      const dotClass  = isFirst ? "first" : isLast ? "last" : "mid";
-      const typeLabel = isFirst ? "Origin" : isLast ? "Destination" : "Stop " + (i + 1);
+      const isFirst  = i === 0, isLast = i === stops.length - 1;
+      const dotClass = isFirst ? "first" : isLast ? "last" : "mid";
+      const typeLabel= isFirst ? "Origin" : isLast ? "Destination" : "Stop " + (i + 1);
       list.innerHTML += `
         <div class="stop-row">
           <div class="stop-dot ${dotClass}">${isFirst ? "▶" : isLast ? "★" : "●"}</div>
@@ -385,7 +532,7 @@
   };
 
   window.closeModal = () => document.getElementById("stopsModal").classList.remove("open");
-  document.getElementById("stopsModal").addEventListener("click", function (e) { if (e.target === this) closeModal(); });
+  document.getElementById("stopsModal").addEventListener("click", function(e) { if (e.target === this) closeModal(); });
 
   window.modalTrack = function () {
     closeModal();
@@ -400,8 +547,23 @@
     setTimeout(() => t.classList.remove("show"), 3000);
   }
 
+  // TOPIC 1: BUBBLE SORT — sorts route cards by route name (A→Z) when user clicks
+  // "Name A→Z". Default view is by bus number. Bubble Sort runs on the route array.
+  window.sortRoutes = function (mode) {
+    const base = defaultRoutes.map((r, i) => ({ ...r, busNumber: i + 1 }));
+    if (mode === 'name-asc') {
+      // Bubble sort alphabetically by route name
+      buildRoutes(bubbleSort(base, (a, b) => a.path.localeCompare(b.path)));
+    } else {
+      // Default: display in bus number order (1 to 27)
+      buildRoutes(base);
+    }
+  };
+
+  // ─── Initialise ─────────────────────────────────────────────
   buildBusGrid();
-  buildRoutes();
+  // Default render: routes in bus number order
+  buildRoutes(defaultRoutes.map((r, i) => ({ ...r, busNumber: i + 1 })));
 </script>
 </body>
 </html>
